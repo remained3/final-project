@@ -7,24 +7,19 @@ import Button from './Button';
 // css
 import "./styles/MentorListItem.scss";
 
-const user = {
-  name: "Alison Becker", 
-  Bio: "Fourth year, major in biochemistry",
-  university:  "York University",
-  avatar: image
-}
-const MentorListItem = (props) => {
-  const bgColor = {backgroundColor: "#4979F5"}
 
+const MentorListItem = (props) => {
+  const {avatar, buttonColor, name, Bio, university} = props
+ 
   return (
      <section className="mentor-container">
-      <img className="mentor-picture" src={user.avatar} alt="this is car image" />
+      <img className="mentor-picture" src={avatar} alt="" />
       <div className="mentor-details">
-        <h4>{user.name}</h4>
-        <h5><span id="bio">Bio:</span>{user.Bio}</h5>
-        <h5><span id="uni">University:</span>{user.university}</h5>
+        <h4>{name}</h4>
+        <h5><span id="bio">Bio:</span>{Bio}</h5>
+        <h5><span id="uni">University:</span>{university}</h5>
       </div>
-      <Button name="Reach out" bgColor={bgColor}/>
+      <Button name="Reach out" bgColor={buttonColor}/>
      </section>
   );
 };
