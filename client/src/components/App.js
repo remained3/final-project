@@ -4,6 +4,7 @@ import React from 'react';
 import MentorList from './MentorList';
 import Header from './Header';
 import image from './images/alison.jpeg'
+import Profile from './Profile';
 
 // css
 import "./styles/App.scss";
@@ -40,7 +41,7 @@ function App() {
   <>
    <section className="App">
      <Header />
-     <MentorList users={users} buttonColor={bgColor} />
+     <Profile user={1} buttonColor={bgColor} />
   </section>
   </>
   );
