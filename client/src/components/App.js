@@ -34,7 +34,6 @@ const users  = [
 ]
 
 
-
 function App() {
   const bgColor = {backgroundColor: "#4979F5"}
 
@@ -48,4 +47,3 @@ function App() {
 }
 
 export default App;
-
