@@ -1,18 +1,21 @@
 // import logo from './logo.svg';
 
 import React from 'react';
-
-import Button from '@mui/material/Button';
+import Button from './Button'
+import Mentor from './MentorListItem';
 
 // css
 import "./App.scss";
 
+
 function App() {
-  return <Button 
-        style={{backgroundColor:"#748FFF"}}
-        variant="contained">
-        Example button
-        </Button>;
+  return (
+  <>
+   <section className="App">
+     <Mentor />
+  </section>
+  </>
+  );
 }
 
 export default App;
