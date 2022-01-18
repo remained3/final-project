@@ -5,6 +5,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 const bcrypt = require('bcryptjs');
 var logger = require("morgan");
+const db = require('./db');
+const dbHelpers = require('./helpers/dbHelpers')(db);
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -23,8 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ------------------ ROUTES/ENDPOINTS ------------------
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/messages", messagesRouter);
+app.use("/users", usersRouter);app.use('/api/users', usersRouter(dbHelpers));app.use("/messages", messagesRouter);
 app.use("/mentors", mentorsRouter);
 
 
