@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 10px 20px;
+  background-color: lawngreen;
+}
+
+.header > div {
+  margin: 10px 0;
+}
