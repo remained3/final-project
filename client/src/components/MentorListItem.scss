@@ -1,0 +1,51 @@
+@use 'base' as *;
+
+h1,h2,h3,h4,h5,li,ul {
+  margin: 0;
+}
+.mentor-container{
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+  align-items: center;
+  background-color: $light;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 2em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+
+  .image-container {
+    display: flex;
+    width: 2em;
+    justify-content: center;
+    background-color: $deep-blue;
+  }
+
+  .mentor-picture {
+    width: 80px;
+    height: 100px;
+    border-radius: 50%;
+    margin-left: 2.5em;
+  }
+  .mentor-details {
+    line-height: 1.2;
+    h4 {
+      font-weight: 700;
+      font-size: 36px;
+      color:$deep-blue
+    }
+    #bio {
+      font-weight: 700;
+      font-size: 1.5em;
+      color: $dark-color;
+      margin-right: .7em;
+    }
+    #uni {
+      font-weight: 700;
+      color: $dark-color;
+      margin-right: .7em;
+      font-size: 1.5em;
+    }
+  }
+}

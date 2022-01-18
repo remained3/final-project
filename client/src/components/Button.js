@@ -1,7 +1,11 @@
 import React from "react";
+import Button from '@mui/material/Button';
 
-const Button = (props) => {
-  return <button></button>;
+
+const ButtonUi = (props) => {
+  
+  const {name, bgColor} = props;
+  return <Button variant="contained" style={bgColor}>{name}</Button>;
 };
 
-export default Button;
+export default ButtonUi;
