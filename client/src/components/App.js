@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Button from './Button'
-import Mentor from './MentorListItem';
 import MentorList from './MentorList';
+import Header from './Header';
 import image from './images/alison.jpeg'
 
 // css
@@ -40,6 +40,7 @@ function App() {
   return (
   <>
    <section className="App">
+     <Header />
      <MentorList users={users} buttonColor={bgColor} />
   </section>
   </>
