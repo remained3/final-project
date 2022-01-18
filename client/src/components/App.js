@@ -2,6 +2,7 @@
 
 import React from 'react';
 import MentorList from './MentorList';
+import Header from './Header';
 import image from './images/alison.jpeg'
 
 // css
@@ -38,6 +39,7 @@ function App() {
   return (
   <>
    <section className="App">
+     <Header />
      <MentorList users={users} buttonColor={bgColor} />
   </section>
   </>
