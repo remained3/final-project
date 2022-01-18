@@ -1,8 +1,6 @@
-// import logo from './logo.svg';
+
 
 import React from 'react';
-import Button from './Button'
-import Mentor from './MentorListItem';
 import MentorList from './MentorList';
 import image from './images/alison.jpeg'
 
