@@ -1,22 +1,21 @@
-// import logo from './logo.svg';
-
-import React from 'react';
-import Button from './Button'
-import Mentor from './MentorListItem';
+import React from "react";
+import Mentor from "./MentorListItem";
+import Header from "./Header";
 
 // css
 import "./App.scss";
 
-
 function App() {
   return (
-  <>
-   <section className="App">
-     <Mentor />
-  </section>
-  </>
+    <>
+      <header>
+        <Header />
+      </header>
+      <section className="App">
+        <Mentor />
+      </section>
+    </>
   );
 }
 
 export default App;
-
