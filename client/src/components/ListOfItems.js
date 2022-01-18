@@ -14,7 +14,7 @@ const ListOfItems = () => {
         sx={{
           width: 300,
           position: "absolute",
-          top: 5,
+          top: 50,
           left: "400px",
           backgroundColor: "#758fff",
         }}
