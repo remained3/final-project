@@ -5,7 +5,7 @@ import image from './images/alison.jpeg'
 import Button from './Button';
 
 // css
-import "./MentorListItem.scss";
+import "./styles/MentorListItem.scss";
 
 const user = {
   name: "Alison Becker", 

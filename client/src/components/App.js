@@ -5,7 +5,7 @@ import Button from './Button'
 import Mentor from './MentorListItem';
 
 // css
-import "./App.scss";
+import "./styles/App.scss";
 
 
 function App() {
