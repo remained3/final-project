@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./Confirmation.scss";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
@@ -22,7 +21,7 @@ const Confirmation = (props) => {
         <CheckBoxIcon
           sx={{
             fill: "#4979f5",
-            fontSize: "100px",
+            fontSize: "150px",
           }}
         />
         <h3>Your question is sent!</h3>
