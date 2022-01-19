@@ -8,8 +8,8 @@ h1,h2,h3,h4,h5,li,ul {
   justify-content: center;
   gap: 5em;
   padding: 1em;
-  height: 200px;
-  width: 1000px;
+  height: 120px;
+  width: 800px;
   align-items: center;
   background-color: $light;
   margin: 2em auto;
@@ -24,12 +24,12 @@ h1,h2,h3,h4,h5,li,ul {
     background-color: $deep-blue;
   }
 
-  .mentor-picture {
-    width: 120px;
-    height: 150px;
-    border-radius: 50%;
-    margin-left: 2.5em;
-  }
+  // .mentor-picture {
+  //   width: 100px;
+  //   height: 120px;
+  //   border-radius: 50%;
+  //   margin-left: 2.5em;
+  // }
   .mentor-details {
     line-height: 1.2;
     h4 {

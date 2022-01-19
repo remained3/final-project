@@ -3,7 +3,9 @@
 import React from 'react';
 import MentorList from './MentorList';
 import Header from './Header';
-import image from './images/alison.jpeg'
+import image from './images/alison.png'
+import image2 from './images/student2.png';
+import image3 from './images/nana.png';
 
 // css
 import "./styles/App.scss";
@@ -21,14 +23,14 @@ const users  = [
   name: "Maley Becker", 
   Bio: "Third year, major in compsci",
   university:  "York University",
-  avatar: image
+  avatar: image2
 },
 {
   id: 3,
   name: "Ali Hassan", 
   Bio: "Fourth year, major in biochemistry",
   university:  "Carlton University",
-  avatar: image
+  avatar: image3
 },
 ]
 
