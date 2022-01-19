@@ -42,31 +42,41 @@
 
   
     // styles for select mentor box
-    .search-box{
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    // .search-box{
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
 
-      width: 200px;
-      height: 40px;
-      border: 1px solid #748FFF;
-      background-color: white;
+    //   width: 200px;
+    //   height: 40px;
+    //   border: 1px solid #748FFF;
+    //   background-color: white;
 
-      color: $dark-color;
-      border-radius: 1em;
-      cursor: pointer;
+    //   color: $dark-color;
+    //   border-radius: 1em;
+    //   cursor: pointer;
       
-      // add style to caretdown symbol
-      #icon{
-        margin-left: .5em;
-      }
-      // hover effect for mentor select box
-      &:hover{
-        background-color: #748FFF;
-        color: white;
-      }
+    //   // add style to caretdown symbol
+    //   #icon{
+    //     margin-left: .5em;
+    //   }
+    //   // hover effect for mentor select box
+    //   &:hover{
+    //     background-color: #748FFF;
+    //     color: white;
+    //   }
 
-     }
+    //  }
+    #my-input{
+       width: 200px;
+       height: 40px;
+       outline: none;
+       border: 1px solid $dark-color;
+       border-radius: 1em;
+       text-align: center;
+       font-weight: 600;
+       
+    }
      
     ul {
       display: flex;

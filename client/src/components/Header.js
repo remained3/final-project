@@ -6,7 +6,8 @@ import logo from './images/logo.svg';
 
 import Typography from '@mui/material/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FormControl } from '@mui/material';
 
 const Header = (props) => {
   const handleChange = (ev) => {
@@ -24,13 +25,13 @@ const Header = (props) => {
         </div>
       
          
-        <button className="search-box" onClick={ () =>handleChange}>
-              <Typography variant="h6">select mentor 
-                <span id="icon">
-                <FontAwesomeIcon icon={faCaretDown}/>
-                </span>
-              </Typography>
-        </button> 
+        <form className="search-box">
+          <input id="my-input" placeholder="mentor name..." />
+          <span>
+            
+          </span>
+        </form> 
+
         <ul>
           <li><Btn bgColor={props.btnColor} name="login" /></li>
           <li><Btn bgColor={props.btnColor} name="Register"/></li>
