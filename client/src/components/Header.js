@@ -27,8 +27,9 @@ const Header = (props) => {
          
         <form className="search-box">
           <input id="my-input" placeholder="mentor name..." />
-          <span>
-            
+          
+          <span id="icon">
+            <FontAwesomeIcon icon={faSearch}/>
           </span>
         </form> 
 

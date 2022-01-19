@@ -67,7 +67,9 @@
     //   }
 
     //  }
-    #my-input{
+    #my-input {
+       position: relative;
+       background-color: white;
        width: 200px;
        height: 40px;
        outline: none;
@@ -75,7 +77,19 @@
        border-radius: 1em;
        text-align: center;
        font-weight: 600;
-       
+       transition: backgroud-color .3s ease-in border cubic-bezier(0.39, 0.575, 0.565, 1);
+       &:hover{
+         background-color: $deep-blue;
+         color: $light;
+         cursor: pointer;
+       }
+    }
+
+    #icon {
+      position: absolute;
+      top: 4em;
+      margin-left: -2em;
+      color: $dark-color;
     }
      
     ul {
