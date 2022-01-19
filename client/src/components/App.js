@@ -35,11 +35,12 @@ const users  = [
 
 function App() {
   const bgColor = {backgroundColor: "#4979F5"}
+  const menuBtnColor = {backgroundColor: '#E8EFFF', color: '#6E7698'}
 
   return (
   <>
+  <Header btnColor={menuBtnColor} />
    <section className="App">
-     <Header />
      <MentorList users={users} buttonColor={bgColor} />
   </section>
   </>

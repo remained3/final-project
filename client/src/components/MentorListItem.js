@@ -1,15 +1,11 @@
 import React from "react";
-import Card from '@mui/material/Card';
-
-import image from './images/alison.jpeg'
 import Button from './Button';
 
 // css
 import "./styles/MentorListItem.scss";
 
-
 const MentorListItem = (props) => {
-  const {avatar, buttonColor, name, Bio, university} = props
+  const {avatar, buttonColor, name, Bio, university} = props;
  
   return (
      <section className="mentor-container">
@@ -19,7 +15,7 @@ const MentorListItem = (props) => {
         <h5><span id="bio">Bio:</span>{Bio}</h5>
         <h5><span id="uni">University:</span>{university}</h5>
       </div>
-      <Button name="Reach out" bgColor={buttonColor}/>
+      <Button name={name} bgColor={buttonColor}/>
      </section>
   );
 };

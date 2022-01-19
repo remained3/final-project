@@ -1,0 +1,81 @@
+// import shared resources
+// [*] ignore name spacing for variables
+
+@use '../base' as *;
+
+.navBar{
+  // background-color: red;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 110px;
+  border-bottom: solid 1px #C4C4C4;
+  margin-bottom: 5em;
+  z-index: 100;
+  /*
+  Blue banner styles
+  -------------------*/
+  .blue-banner{
+    width: 100%;
+    height: 40px;
+    background-color: $light-blue;
+  }
+
+  // menu styles
+  .menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8em;
+    background-color: white;
+    // media query for menu items
+    @media only screen and (max-width: 600px){
+      & {
+        padding: 0;
+        margin: 0;
+
+        .search-box {
+          border: none;
+        }
+      }
+    } 
+
+  
+    // styles for select mentor box
+    .search-box{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 200px;
+      height: 40px;
+      border: 1px solid #748FFF;
+      background-color: white;
+
+      color: $dark-color;
+      border-radius: 1em;
+      cursor: pointer;
+      
+      // add style to caretdown symbol
+      #icon{
+        margin-left: .5em;
+      }
+      // hover effect for mentor select box
+      &:hover{
+        background-color: #748FFF;
+        color: white;
+      }
+
+     }
+     
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;   
+    }
+    ul li {
+      list-style: none;
+      margin: 1em; 
+    }
+  } // end menu styling
+}
