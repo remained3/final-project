@@ -1,0 +1,26 @@
+.confirm-container {
+  margin: auto;
+  width: 50%;
+  height: 450px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  gap: 50px 20px;
+  .confirm-details {
+    margin: auto;
+    width: 50%;
+    img {
+      border-radius: 50%;
+      padding: 0px;
+      width: 300px;
+      height: 300px;
+      line-height: 50px;
+    }
+    h4 {
+      color: #4979f5;
+    }
+    h3 {
+      color: #6e7699;
+    }
+  }
+}
