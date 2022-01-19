@@ -8,6 +8,8 @@ import image2 from './images/student2.png';
 import image3 from './images/nana.png';
 import image4 from './images/Josh.png';
 
+import {BrowserRouter as Router, Link} from 'react-router-dom'
+
 // css
 import "./styles/App.scss";
 
@@ -56,10 +58,13 @@ function App() {
 
   return (
   <>
-  <Header btnColor={menuBtnColor} />
-   <section className="App">
-     <MentorList users={users} buttonColor={bgColor} />
-  </section>
+    <Router>
+      <Link to="/">Home</Link>
+      <Header btnColor={menuBtnColor} />
+      <section className="App">
+        <MentorList users={users} buttonColor={bgColor} />
+      </section>
+    </Router>
   </>
   );
 }
