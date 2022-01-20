@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import Login from './Login';
+import Button from '../Button.js'
+import "./Register.scss";
+
 
 function Register(props) {
   const [email, setEmail] = useState("");
@@ -21,13 +23,13 @@ function Register(props) {
   };
 
   return (
-    <section className="registration">
+    <section className="registration-container">
       <form autoComplete="off" onSubmit={event => event.preventDefault()}>
       <div className="name">
           <input
             placeholder="Please Enter Your Name"
             value={name}
-            onChange={(event) => setDetails(event.target.value)}
+            onChange={(event) => setName(event.target.value)}
             type="text"
           />
         </div>
@@ -49,9 +51,7 @@ function Register(props) {
         </div>        
         <section className="registration__validation">{error}</section>
         <section className="registration__button">
-          <Button danger onClick={() => cancel()}>Cancel</Button>
-          <Button confirm onClick={() =>
-            createAccount(email, password, name)}>Confirm</Button>
+          <Button confirm>Confirm</Button>
         </section>
       </form>
     </section>

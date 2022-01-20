@@ -7,6 +7,8 @@ import image from './images/alison.png'
 import image2 from './images/student2.png';
 import image3 from './images/nana.png';
 import image4 from './images/Josh.png';
+import Login from './Login/Login';
+import Register from './Login/Register';
 
 // css
 import "./styles/App.scss";
