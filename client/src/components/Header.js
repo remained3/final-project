@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@mui/material';
+import {Link} from 'react-router-dom'
 
 const Header = (props) => {
   const handleChange = (ev) => {
@@ -34,8 +35,16 @@ const Header = (props) => {
         </form> 
 
         <ul>
-          <li><Btn bgColor={props.btnColor} name="login" /></li>
-          <li><Btn bgColor={props.btnColor} name="Register"/></li>
+          <Link to="/">
+            <li><Btn bgColor={props.btnColor} name="Home"></Btn></li>
+          </Link>
+          <Link to="/login">
+            <li><Btn bgColor={props.btnColor} name="login"></Btn></li>
+          </Link>
+          
+          <Link to="/register">
+            <li><Btn bgColor={props.btnColor} name="Register"/></li>
+          </Link>
         </ul>
       </section>
 
