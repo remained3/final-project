@@ -24,17 +24,20 @@ function Register(props) {
 
   return (
     <section className="registration">
+      <h2 className="title">Create Account</h2>
       <form autoComplete="off" onSubmit={event => event.preventDefault()}>
           <div className="name">
+              <label>Name</label>
               <input
-                placeholder="Please Enter Your Name"
+                placeholder="Your name here..."
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 type="text"
               />
           </div>
-          
+
           <div className="email">
+            <label>Email</label>
             <input
               placeholder="Please enter your email"
               value={email}
@@ -44,6 +47,7 @@ function Register(props) {
           </div>
 
           <div className="password">
+           <label>Password</label>
             <input
               placeholder="Please enter your password"
               value={password}
@@ -52,12 +56,20 @@ function Register(props) {
             />
           </div>  
 
+          <div className="University">
+           <label>Password</label>
+            <input
+              placeholder="University here..."
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              type="text"
+            />
+          </div>  
+
           <input type="checkbox" id="mentor_val" name="mentor_val" value="mentor" />
-          <label for="mentor_val"> I want to be a mentor!</label><br></br>      
+          <label htmlFor="mentor_val"> I agree to <span id="use">Use</span> the site and to <span id="respect">respect everyone</span> here on the site!</label><br></br>      
           <section className="registration__validation">{error}</section>
-          <section className="registration__button">
-          <Button confirm>Confirm</Button>
-        </section>
+      
       </form>
     </section>
   );

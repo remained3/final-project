@@ -6,13 +6,37 @@ h1,h2,h3,h4,h5,li,ul {
 .registration{
   display: flex;
   justify-content: center;
-  gap: 5em;
-  padding: 1em;
-  height: 120px;
   align-items: center;
-  background-color: $light;
+  flex-direction: column;
+  padding: 1em;
   margin: 2em auto;
-  border-radius: 2em;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
 
+  .title {
+    color: $light-blue;
+    margin-bottom: 1em;
+  }
+
+  & div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+    label {
+      margin-bottom: 1em;
+      color: $dark-color;
+    }
+    input{
+      margin-left: 1em;
+      width: 35em;
+      height: 2.5em;
+      font-weight: 700;
+      padding: .5em;
+      outline: none;
+      border-radius: 1em;
+      color: $deep-blue;
+      border: 1px solid $light-blue;
+    }
+  }
+  span {
+    color: $green
+  }
 }
