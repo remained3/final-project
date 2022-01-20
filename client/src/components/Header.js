@@ -6,7 +6,9 @@ import logo from './images/logo.svg';
 
 import Typography from '@mui/material/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FormControl } from '@mui/material';
+import {Link} from 'react-router-dom'
 
 const Header = (props) => {
   const handleChange = (ev) => {
@@ -24,16 +26,25 @@ const Header = (props) => {
         </div>
       
          
-        <button className="search-box" onClick={ () =>handleChange}>
-              <Typography variant="h6">select mentor 
-                <span id="icon">
-                <FontAwesomeIcon icon={faCaretDown}/>
-                </span>
-              </Typography>
-        </button> 
+        <form className="search-box">
+          <input id="my-input" placeholder="mentor name..." />
+          
+          <span id="icon">
+            <FontAwesomeIcon icon={faSearch}/>
+          </span>
+        </form> 
+
         <ul>
-          <li><Btn bgColor={props.btnColor} name="login" /></li>
-          <li><Btn bgColor={props.btnColor} name="Register"/></li>
+          <Link to="/">
+            <li><Btn bgColor={props.btnColor} name="Home"></Btn></li>
+          </Link>
+          <Link to="/login">
+            <li><Btn bgColor={props.btnColor} name="login"></Btn></li>
+          </Link>
+          
+          <Link to="/register">
+            <li><Btn bgColor={props.btnColor} name="Register"/></li>
+          </Link>
         </ul>
       </section>
 

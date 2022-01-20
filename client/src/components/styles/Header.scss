@@ -42,36 +42,65 @@
 
   
     // styles for select mentor box
-    .search-box{
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    // .search-box{
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
 
-      width: 200px;
-      height: 40px;
-      border: 1px solid #748FFF;
-      background-color: white;
+    //   width: 200px;
+    //   height: 40px;
+    //   border: 1px solid #748FFF;
+    //   background-color: white;
 
-      color: $dark-color;
-      border-radius: 1em;
-      cursor: pointer;
+    //   color: $dark-color;
+    //   border-radius: 1em;
+    //   cursor: pointer;
       
-      // add style to caretdown symbol
-      #icon{
-        margin-left: .5em;
-      }
-      // hover effect for mentor select box
-      &:hover{
-        background-color: #748FFF;
-        color: white;
-      }
+    //   // add style to caretdown symbol
+    //   #icon{
+    //     margin-left: .5em;
+    //   }
+    //   // hover effect for mentor select box
+    //   &:hover{
+    //     background-color: #748FFF;
+    //     color: white;
+    //   }
 
-     }
+    //  }
+    #my-input {
+       position: relative;
+       width: 200px;
+       height: 40px;
+
+       outline: none;
+       border: 1px solid $dark-color;
+       border-radius: .5em;
+
+       text-align: center;
+       font-weight: 600;
+       transition: all .5s cubic-bezier(0.39, 0.575, 0.565, 1);
+       
+       &:hover{
+         background-color: $light-blue;
+         color: $light;
+         cursor: pointer;
+       }
+    }
+
+    #icon {
+      position: absolute;
+      top: 4em;
+      margin-left: -2em;
+      color: $dark-color;
+    }
      
     ul {
       display: flex;
       margin: 0;
-      padding: 0;   
+      padding: 0;
+      a {
+        text-decoration: none;
+      }
     }
     ul li {
       list-style: none;

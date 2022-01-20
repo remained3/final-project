@@ -1,19 +1,23 @@
 
-
 import React from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import MentorList from './MentorList';
 import Header from './Header';
 import image from './images/alison.png'
 import image2 from './images/student2.png';
 import image3 from './images/nana.png';
 import image4 from './images/Josh.png';
+import Login from "./Login";
+import Register from "./Register";
+import Profile from "./Profile";
+import Question from "./Question"
 import Login from './Login/Login';
 import Register from './Login/Register';
 
 // css
 import "./styles/App.scss";
 
-const users  = [
+const users = [
   {
   id: 1,
   name: "Alison Becker", 
@@ -36,14 +40,14 @@ const users  = [
   avatar: image3
 },
 {
-  id: 3,
+  id: 4,
   name: "Josh Lee", 
   Bio: "Fourth year, major in biochemistry",
   university:  "Carlton University",
   avatar: image4
 },
 {
-  id: 3,
+  id: 5,
   name: "Ali Hassan", 
   Bio: "Fourth year, major in biochemistry",
   university:  "Carlton University",
@@ -53,16 +57,22 @@ const users  = [
 
 
 function App() {
-  const bgColor = {backgroundColor: "#4979F5"}
-  const menuBtnColor = {backgroundColor: '#E8EFFF', color: '#6E7698'}
+  const bgColor = { backgroundColor: "#4979F5" };
+  const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
   return (
-  <>
-  <Header btnColor={menuBtnColor} />
-   <section className="App">
-     <MentorList users={users} buttonColor={bgColor} />
-  </section>
-  </>
+    <Router>
+      <Header btnColor={menuBtnColor} />
+      <section className="App">
+      <Routes>
+        <Route path="/" element={<MentorList users={users} buttonColor={bgColor} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="/question" element={<Question />} />
+        <Route path="/mentors" element={<MentorList users={users} buttonColor={bgColor} />} />
+      </Routes>
+      </section>
+    </Router>
   );
 }
 

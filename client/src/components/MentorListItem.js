@@ -15,7 +15,7 @@ const MentorListItem = (props) => {
         <h5><span id="bio">Bio:</span>{Bio}</h5>
         <h5><span id="uni">University:</span>{university}</h5>
       </div>
-      <Button name={name} bgColor={buttonColor}/>
+      <Button name='Reach out' bgColor={buttonColor}/>
      </section>
   );
 };
