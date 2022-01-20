@@ -67,7 +67,7 @@ function Register(props) {
           </div>  
 
           <input type="checkbox" id="mentor_val" name="mentor_val" value="mentor" />
-          <label htmlFor="mentor_val"> I agree to <span id="use">Use</span> the site and to <span id="respect">respect everyone</span> here on the site!</label><br></br>      
+          <label htmlFor="mentor_val"> I agree to <span>Use</span> the site and to <span>respect everyone</span> here on the site!</label><br></br>      
           <section className="registration__validation">{error}</section>
       
       </form>
