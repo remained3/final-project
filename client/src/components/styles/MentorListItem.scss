@@ -16,6 +16,9 @@ h1,h2,h3,h4,h5,li,ul {
   border-radius: 1em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   
+  a {
+    text-decoration: none;
+  }
 
   .image-container {
     display: flex;
@@ -24,12 +27,7 @@ h1,h2,h3,h4,h5,li,ul {
     background-color: $deep-blue;
   }
 
-  // .mentor-picture {
-  //   width: 100px;
-  //   height: 120px;
-  //   border-radius: 50%;
-  //   margin-left: 2.5em;
-  // }
+  
   .mentor-details {
     line-height: 1.2;
     h4 {

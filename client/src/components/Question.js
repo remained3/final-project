@@ -3,6 +3,10 @@ import image from "./images/alison.png";
 import "./Question.scss";
 import Button from "./Button";
 
+import {Link, useParams} from 'react-router-dom'
+
+
+
 const user = {
   id: 1,
   name: "Alison Becker",
@@ -13,6 +17,7 @@ const user = {
 };
 const Question = (props) => {
   const bgColor = { backgroundColor: "#4979F5" };
+  console.log(useParams())
 
   return (
     <section className="question-container">
@@ -41,7 +46,9 @@ const Question = (props) => {
           placeholder="Write something.."
           style={{ height: "300px", width: "300px" }}
         ></textarea>
+
         <Button className="btn" name="send" buttonColor={bgColor} />
+        
       </div>
     </section>
   );

@@ -10,7 +10,7 @@ import image4 from './images/Josh.png';
 import Login from "./Login";
 import Register from "./Register";
 import Profile from "./Profile";
-import Question from "./Question"
+import Mentor from "./Question"
 
 // css
 import "./styles/App.scss";
@@ -24,7 +24,7 @@ const users = [
   avatar: image
 },
 {
-  id: 2,
+  id: 52,
   name: "Maley Becker", 
   Bio: "Third year, major in compsci",
   university:  "York University",
@@ -59,6 +59,7 @@ function App() {
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
   return (
+
     <Router>
       <Header btnColor={menuBtnColor} />
       <section className="App">
@@ -66,8 +67,13 @@ function App() {
         <Route path="/" element={<MentorList users={users} buttonColor={bgColor} />} />
         <Route path="/login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="/question" element={<Question />} />
-        <Route path="/mentors" element={<MentorList users={users} buttonColor={bgColor} />} />
+        <Route path="/mentor" element={<Mentor />} >
+          <Route path=":id"></Route>
+        </Route>
+
+        <Route path="/mentors" element={<MentorList users={users} buttonColor={bgColor} />}>
+          <Route path=":id" element={<Mentor />} />
+        </Route>
       </Routes>
       </section>
     </Router>
