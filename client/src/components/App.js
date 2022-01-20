@@ -10,6 +10,7 @@ import image4 from './images/Josh.png';
 import Login from "./Login";
 import Register from "./Register";
 import Profile from "./Profile";
+import Question from "./Question"
 
 // css
 import "./styles/App.scss";
@@ -65,7 +66,7 @@ function App() {
         <Route path="/" element={<MentorList users={users} buttonColor={bgColor} />} />
         <Route path="/login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/question" element={<Question />} />
         <Route path="/mentors" element={<MentorList users={users} buttonColor={bgColor} />} />
       </Routes>
       </section>
