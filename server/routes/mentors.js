@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// GET mentors
+// GET all mentors
 const mentorsRouter = (db) => {
   router.get('/',function(req, res, next) {
     const queryString = "SELECT * FROM users WHERE mentor = true;";
