@@ -58,7 +58,10 @@ function App() {
 
   return (
   <>
-  <Register/>
+  <Header btnColor={menuBtnColor} />
+   <section className="App">
+     <MentorList users={users} buttonColor={bgColor} />
+  </section>
   </>
   );
 }
