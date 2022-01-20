@@ -70,12 +70,6 @@ function App() {
       </Routes>
       </section>
     </Router>
-  // <>
-  //   <Header btnColor={menuBtnColor} />
-  //   <section className="App">
-  //     <MentorList users={users} buttonColor={bgColor} />
-  //   </section>
-  // </>
   );
 }
 
