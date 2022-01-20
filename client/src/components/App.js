@@ -14,7 +14,7 @@ import Profile from "./Profile";
 // css
 import "./styles/App.scss";
 
-const users  = [
+const users = [
   {
   id: 1,
   name: "Alison Becker", 
@@ -54,8 +54,8 @@ const users  = [
 
 
 function App() {
-  const bgColor = {backgroundColor: "#4979F5"}
-  const menuBtnColor = {backgroundColor: '#E8EFFF', color: '#6E7698'}
+  const bgColor = { backgroundColor: "#4979F5" };
+  const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
   return (
     <Router>
