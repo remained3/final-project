@@ -23,7 +23,7 @@ function Register(props) {
   };
 
   return (
-    <section className="registration-container">
+    <section className="registration">
       <form autoComplete="off" onSubmit={event => event.preventDefault()}>
       <div className="name">
           <input
@@ -48,7 +48,9 @@ function Register(props) {
             onChange={(event) => setPassword(event.target.value)}
             type="text"
           />
-        </div>        
+        </div>  
+        <input type="checkbox" id="mentor_val" name="mentor_val" value="mentor" />
+          <label for="mentor_val"> I want to be a mentor!</label><br></br>      
         <section className="registration__validation">{error}</section>
         <section className="registration__button">
           <Button confirm>Confirm</Button>
