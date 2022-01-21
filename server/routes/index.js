@@ -1,10 +1,16 @@
-var express = require("express");
-var router = express.Router();
+/*
+ * All routes for Users are defined here
+ * Since this file is loaded in server.js into api/users,
+ *   these routes are mounted onto /users
+ * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
+ */
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  console.log("I got something");
-  res.render("index", { title: "Express" });
-});
+const express = require("express");
+const router = express.Router();
 
-module.exports = router;
+module.exports = (db) => {
+  router.get("/", (req, res) => {
+    res.send("Hello world");
+  });
+  return router;
+};
