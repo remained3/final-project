@@ -8,7 +8,7 @@ const app = express();
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const mentorsRouter = require('./routes/mentors');
-const cors = require('cors');
+
 
 app.use(cors());
 app.use(

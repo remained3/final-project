@@ -3,11 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
     "start": "nodemon app.js"
-=======
-    "start": " node app.js"
->>>>>>> connect/connect-to-db
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
