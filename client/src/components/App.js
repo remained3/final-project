@@ -12,6 +12,9 @@ import Register from "./Register";
 import Profile from "./Profile";
 import Mentor from "./Question"
 
+import axios from 'axios'
+import { useState, useEffect } from 'react';
+
 // css
 import "./styles/App.scss";
 
@@ -58,6 +61,9 @@ function App() {
   const bgColor = { backgroundColor: "#4979F5" };
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
+  useEffect(() => {
+    axios.get('http://localhost:8080/mentors').then(res => console.log(res.data))
+  }, [])
   return (
 
     <Router>

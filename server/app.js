@@ -7,18 +7,26 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
+const mentorsRouter = require('./routes/mentors');
+const cors = require('cors');
 
+// ----------------- MIDDLEWARES -----------------
+app.use(cors())
 app.use(
   cookieSession({
     name: "session",
     keys: ["key1"],
   })
 );
+
+// dummy database
+const db = {name: "meme", mentor: true, course: "Biology"}
 // PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("./lib/db.js");
-const db = new Pool(dbParams);
-db.connect();
+// const { Pool } = require("pg");
+// const dbParams = require("./lib/db.js");
+// const db = new Pool(dbParams);
+// db.connect();
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -34,6 +42,7 @@ const homeRoutes = require("./routes/index");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", homeRoutes(db));
+app.use("/mentors", mentorsRouter(db))
 // Note: mount other resources here, using the same pattern above
 
 // Home page
