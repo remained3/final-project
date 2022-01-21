@@ -1,6 +1,5 @@
-INSERT INTO institutions (name, description)
-VALUES
-('computer science', 'any languages')
-('biology', 'biology')
-('music', 'theory and practical')
-('math', 'any level')
+INSERT INTO specializations (id, name, description)
+VALUES (1, 'computer science', 'any languages'),
+(2, 'biology', 'biology'),
+(3, 'music', 'theory and practical'),
+(4, 'math', 'any level');
