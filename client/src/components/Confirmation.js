@@ -18,14 +18,14 @@ const Confirmation = (props) => {
           alt="this is mentor image"
         />
 
-        <h4>{user.name}</h4>
+        <h2>{user.name}</h2>
         <CheckBoxIcon
           sx={{
             fill: "#4979f5",
-            fontSize: "100px",
+            fontSize: "150px",
           }}
         />
-        <h3>Your question is sent!</h3>
+        <h1>Your question is sent!</h1>
       </div>
     </section>
   );

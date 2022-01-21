@@ -8,7 +8,7 @@ import AppBar from "@mui/material/AppBar";
 const darkTheme = createTheme({
   palette: {
     primary: {
-      main: "#1976d2",
+      main: "#758fff",
     },
   },
 });
