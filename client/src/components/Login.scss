@@ -1,0 +1,39 @@
+@use './base' as *;
+
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1em;
+  margin: 2em auto;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  
+  .title {
+    color: $light-blue;
+    margin-bottom: 1em;
+  }
+
+  & div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+    label {
+      margin-bottom: 1em;
+      color: $dark-color;
+    }
+    input{
+      margin-left: 1em;
+      width: 35em;
+      height: 2.5em;
+      font-weight: 700;
+      padding: .5em;
+      outline: none;
+      border-radius: 1em;
+      color: $deep-blue;
+      border: 1px solid $light-blue;
+    }
+  }
+}
+  
