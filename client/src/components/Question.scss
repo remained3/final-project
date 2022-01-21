@@ -43,20 +43,11 @@ ul {
 
   
 
-  #bio, #uni {
+  #bio, #uni, #status {
     font-weight: 700;
     font-size: 1.5em;
     margin-right: 0.2em;
     color: #6e7699;
-  }
-
-  #status {
-    color: #2acdba;
-
-    span {
-      color: #6e7699;
-      background-color: lavender;
-    }
   }
 
   Button {

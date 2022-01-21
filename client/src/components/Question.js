@@ -36,8 +36,8 @@ const Question = (props) => {
               <span id="uni">University:</span>
               {user.university}
             </h5>
-            <h5 id="status">
-              <span>status:</span>
+            <h5>
+              <span id="status">status:</span>
               {user.status}
             </h5>
           </div>

@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS questions CASCADE;
-CREATE TABLE questions (
-  id SERIAL PRIMARY KEY NOT NULL,
-    student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    question VARCHAR(255) NOT NULL,
-    answer VARCHAR(255) NOT NULL
-);

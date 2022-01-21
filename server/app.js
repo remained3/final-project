@@ -7,6 +7,8 @@ const cors = require("cors");
 const app = express();
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
+const mentorsRouter = require('./routes/mentors');
+const cors = require('cors');
 
 app.use(cors());
 app.use(
@@ -15,11 +17,14 @@ app.use(
     keys: ["key1"],
   })
 );
+
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -38,6 +43,7 @@ const usersRoutes = require("./routes/users");
 app.use("/", homeRoutes(db));
 app.use("/users", usersRoutes(db));
 
+app.use("/mentors", mentorsRouter(db))
 // Note: mount other resources here, using the same pattern above
 
 // Home page
