@@ -10,6 +10,8 @@ function Register(props) {
   const [name, setName] = useState("");
   const [error, setError] = useState('');
 
+  const buttonColor = {backgroundColor: '#748FFF'}
+  
 
   const validatation = () => {
     if (!email.length ||
@@ -66,9 +68,20 @@ function Register(props) {
             />
           </div>  
 
+          <div className="toggle-switch">
+            <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+            </label>
+            <h3>mentor</h3>
+          </div>
+           
+
           <input type="checkbox" id="mentor_val" name="mentor_val" value="mentor" />
           <label htmlFor="mentor_val"> I agree to <span>Use</span> the site and to <span>respect everyone</span> here on the site!</label><br></br>      
-          <section className="registration__validation">{error}</section>
+          <section className="registration__validation">{error}</section><br/>
+
+          <Button name='sign up' bgColor={buttonColor}></Button>
       
       </form>
     </section>
