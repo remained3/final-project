@@ -1,31 +1,45 @@
-// ------------------ REQUIREMENTS -----------------
+// load .env data into process.env
+require("dotenv").config();
 
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-const bcrypt = require('bcryptjs');
-var logger = require("morgan");
+// Web server config
+const PORT = process.env.PORT || 8080;
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+const cookieSession = require("cookie-session");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var messagesRouter = require("./routes/messages");
-var mentorsRouter = require("./routes/mentors");
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1"],
+  })
+);
+// PG database client/connection setup
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
 
-// -------------- SERVER SETTINGS ---------------------
+// Load the logger first so all (static) HTTP requests are logged to STDOUT
+// 'dev' = Concise output colored by response status for development use.
+//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+app.use(morgan("dev"));
 
-var app = express();
+app.use(express.urlencoded({ extended: true }));
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+// Separated Routes for each Resource
+// Note: Feel free to replace the example routes below with your own
+const homeRoutes = require("./routes/index");
 
-// ------------------ ROUTES/ENDPOINTS ------------------
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/messages", messagesRouter);
-app.use("/mentors", mentorsRouter);
+// Mount all resource routes
+// Note: Feel free to replace the example routes below with your own
+app.use("/", homeRoutes(db));
+// Note: mount other resources here, using the same pattern above
 
+// Home page
+// Warning: avoid creating more routes in this file!
+// Separate them into separate routes files (see above).
 
-module.exports = app;
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
+});
