@@ -7,10 +7,13 @@
 
 const express = require("express");
 const router = express.Router();
-
+const user = {
+  name: "Alex",
+  number: 2,
+};
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.send("Hello world");
+    res.json(user);
   });
   return router;
 };
