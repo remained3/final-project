@@ -39,7 +39,7 @@ const Login = (props) => {
             />
           </div>  
   
-          <Button name='continue' bgColor={buttonColor}></Button>
+          <Button name='login' bgColor={buttonColor}></Button>
       
       </form>
     </section>
