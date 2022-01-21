@@ -9,16 +9,9 @@ import image4 from "./images/Josh.png";
 import Login from "./Login";
 import Register from "./Register";
 import Profile from "./Profile";
-<<<<<<< HEAD
 import Mentor from "./Question";
 import axios from "axios";
-=======
-import Mentor from "./Question"
 
-import axios from 'axios'
-import { useState, useEffect } from 'react';
-
->>>>>>> connect/connect-to-db
 // css
 import "./styles/App.scss";
 
@@ -64,7 +57,6 @@ function App() {
   const bgColor = { backgroundColor: "#4979F5" };
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
-<<<<<<< HEAD
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:8080/users").then((res) => {
@@ -72,12 +64,6 @@ function App() {
       setUsers(res.data);
     });
   }, []);
-=======
-  useEffect(() => {
-    axios.get('http://localhost:8080/mentors').then(res => console.log(res.data))
-  }, [])
-  return (
->>>>>>> connect/connect-to-db
 
   return (
     <Router>
