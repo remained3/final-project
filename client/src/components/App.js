@@ -15,7 +15,7 @@ import axios from "axios";
 // css
 import "./styles/App.scss";
 
-const users2 = [
+const users = [
   {
     id: 1,
     name: "Alison Becker",
@@ -57,7 +57,7 @@ function App() {
   const bgColor = { backgroundColor: "#4979F5" };
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
-  const [users, setUsers] = useState([]);
+  const [users2, setUsers] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:8080/users").then((res) => {
       console.log(res.data);
