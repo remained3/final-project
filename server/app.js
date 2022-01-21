@@ -1,13 +1,14 @@
 // load .env data into process.env
 require("dotenv").config();
-
 // Web server config
 const PORT = process.env.PORT || 8080;
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 
+app.use(cors());
 app.use(
   cookieSession({
     name: "session",
@@ -30,10 +31,13 @@ app.use(express.urlencoded({ extended: true }));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const homeRoutes = require("./routes/index");
+const usersRoutes = require("./routes/users");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", homeRoutes(db));
+app.use("/users", usersRoutes(db));
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
