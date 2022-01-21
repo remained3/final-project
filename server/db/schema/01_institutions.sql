@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS institutions CASCADE;
+CREATE TABLE institutions (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  location VARCHAR(255) NOT NULL
+);
