@@ -5,11 +5,11 @@ import {Link} from 'react-router-dom'
 import "./styles/MentorListItem.scss";
 
 const MentorListItem = (props) => {
-  const {avatar, buttonColor, name, Bio, university, id} = props;
+  const {picture, buttonColor, name, Bio, university, id} = props;
  
   return (
      <section className="mentor-container">
-      <img className="mentor-picture" src={avatar} alt="" />
+      <img className="mentor-picture" src={picture} alt="" />
       <div className="mentor-details">
         <h4>{name}</h4>
         <h5><span id="bio">Bio:</span>{Bio}</h5>

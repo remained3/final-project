@@ -15,17 +15,23 @@ h1,h2,h3,h4,h5,li,ul {
   margin: 2em auto;
   border-radius: 1em;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+
+  .mentor-picture {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+  }
   
   a {
     text-decoration: none;
   }
 
-  .image-container {
-    display: flex;
-    width: 2em;
-    justify-content: center;
-    background-color: $deep-blue;
-  }
+  // .image-container {
+  //   display: flex;
+  //   width: 2em;
+  //   justify-content: center;
+  //   background-color: $deep-blue;
+  // }
 
   
   .mentor-details {

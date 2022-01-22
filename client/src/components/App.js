@@ -12,6 +12,8 @@ import Profile from "./Profile";
 import Mentor from "./Question";
 import axios from "axios";
 
+import getMentors from "./utility/helper"
+
 // css
 import "./styles/App.scss";
 
@@ -60,14 +62,22 @@ function App() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:8080/users").then((res) => {
-      console.log(res.data);
-      setUsers(res.data);
+      // console.log(res.data);
+      const mentors = (getMentors(res.data))
+      
+      setUsers(() => mentors)
+      console.log("mentors::", mentors)
+      
     });
   }, []);
 
+  console.log("mentors:: ",  typeof users);
+   
+  
   return (
     <Router>
       <Header btnColor={menuBtnColor} />
+      
       <section className="App">
         <Routes>
           <Route
