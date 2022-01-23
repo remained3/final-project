@@ -5,10 +5,17 @@ const PORT = process.env.PORT || 8080;
 const express = require("express");
 const cors = require("cors");
 const app = express();
+// Socket.io
+const http = require("http").createServer(app);
+// const io = require("socket.io")(http);
+const { Server } = require("socket.io");
+const io = new Server(http, {
+  cors: { origin: "*", methods: ["GET", "POST"] },
+});
+
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
-const mentorsRouter = require('./routes/mentors');
-
+const mentorsRouter = require("./routes/mentors");
 
 app.use(cors());
 app.use(
@@ -18,13 +25,11 @@ app.use(
   })
 );
 
-
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
-
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -37,19 +42,30 @@ app.use(express.urlencoded({ extended: true }));
 // Note: Feel free to replace the example routes below with your own
 const homeRoutes = require("./routes/index");
 const usersRoutes = require("./routes/users");
-
+const chatRoutes = require("./routes/chat");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", homeRoutes(db));
-app.use("/api/users", usersRoutes(db));
+app.use("/users", usersRoutes(db));
+app.use("/chat", chatRoutes(db));
 
-app.use("/api/mentors", mentorsRouter(db))
+app.use("/mentors", mentorsRouter(db));
+
 // Note: mount other resources here, using the same pattern above
+
+// io connection
+io.on("connection", (socket) => {
+  console.log("user connected");
+  socket.on("message", ({ name, message }) => {
+    io.emit("message", { name, message });
+    console.log("message", { name, message });
+  });
+});
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
