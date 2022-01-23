@@ -7,7 +7,7 @@ import logo from './images/logo.svg';
 import Typography from '@mui/material/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FormControl } from '@mui/material';
+
 import {Link} from 'react-router-dom'
 
 const Header = (props) => {

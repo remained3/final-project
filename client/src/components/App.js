@@ -8,11 +8,11 @@ import image3 from "./images/nana.png";
 import image4 from "./images/Josh.png";
 import Login from "./Login";
 import Register from "./Register";
-import Profile from "./Profile";
+import Error from "./Error";
 import Question from "./Question";
+
 import axios from "axios";
 
-import getMentors from "./utility/helper"
 
 // css
 import "./styles/App.scss";
@@ -72,6 +72,8 @@ function App() {
             path="/mentors"
             element={<MentorList users={state.users} buttonColor={bgColor} />} 
           />
+
+         <Route path="*" element={<Error />} />
           
         </Routes>
       </section>
