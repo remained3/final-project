@@ -1,6 +1,6 @@
 import React from "react";
-import Button from './Button';
-import {Link} from 'react-router-dom'
+import Button from "./Button";
+import { Link } from "react-router-dom";
 // css
 import "./styles/MentorListItem.scss";
 
@@ -18,7 +18,7 @@ const MentorListItem = (props) => {
       <Link to={`mentors/${id}`} >
         <Button name='Reach out' bgColor={buttonColor}></Button>
       </Link>
-     </section>
+    </section>
   );
 };
 

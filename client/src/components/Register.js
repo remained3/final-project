@@ -59,7 +59,7 @@ function Register(props) {
           </div>  
 
           <div className="University">
-           <label>Password</label>
+           <label>University</label>
             <input
               placeholder="University here..."
               value={password}

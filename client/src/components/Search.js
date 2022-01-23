@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { usehistory } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import Btn from "./Button";
+import { useHistory } from 'react-router-dom'
+import axios from 'axios';
+import Typography from '@mui/material/Typography';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FormControl } from '@mui/material';
 
 function Search() {
-  const history = usehistory();
   const [search, setSearch] = useState();
   const [result, setResult] = useState([]);
 
@@ -12,12 +17,12 @@ function Search() {
       axios.get(mentors)
       .then((results) => {
         setResult([])
-        let searched = value.toLowerCase();
+        let searched = results.toLowerCase();
         for (const key in results) {
           let mentorName = results[key].name.toLowerCase();
-          if(mentorName.slice(0, searched.length).indexOf(searchQuery) !== -1) {
+          if(mentorName.slice(0, searched.length).indexOf(search) !== -1) {
             setResult(prevResult => {
-              return[...prevResult, reesults[key].name]
+              return[...prevResult, results[key].name]
             });
           }
         }
@@ -34,7 +39,6 @@ function Search() {
   <span id="icon">
     <FontAwesomeIcon icon={faSearch}/>
   </span>
-  <Button onClick={()=> history.push('/search')}/>
 </form> ;
 
 }
