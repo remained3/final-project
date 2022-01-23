@@ -3,7 +3,7 @@ import image from "./images/alison.png";
 import "./Question.scss";
 import Button from "./Button";
 
-import {Link, useParams} from 'react-router-dom'
+import {Link, Outlet, useParams} from 'react-router-dom'
 
 
 
@@ -15,30 +15,35 @@ const user = {
   avatar: image,
   status: " available",
 };
+
+
 const Question = (props) => {
-  const buttonColor = {backgroundColor: '#748FFF'}
-  console.log(useParams())
+  const buttonColor = {backgroundColor: '#748FFF'};
+  const {users} = props;
+  let selectedMentorId = parseInt(useParams().id)
+  const selectedMentor = users.filter(user => user.id === selectedMentorId);
+  console.log("selected::", selectedMentor);
 
   return (
     <section className="question-container">
       <div className="pic">
-        <img className="mentor-picture" src={user.avatar} alt="" />
+        <img className="mentor-picture" src={selectedMentor.picture} alt="" />
       </div>
 
       <div className="details-textContainer">
           <div className="question-details">
-            <h4 id="name">{user.name}</h4>
+            <h4 id="name">{selectedMentor.name}</h4>
             <h5>
               <span id="bio">Bio:</span>
-              {user.Bio}
+              {selectedMentor.name}
             </h5>
             <h5>
               <span id="uni">University:</span>
-              {user.university}
+              {selectedMentor.institution}
             </h5>
             <h5>
               <span id="status">status:</span>
-              {user.status}
+              {selectedMentor.last_active}
             </h5>
           </div>
 
@@ -51,6 +56,7 @@ const Question = (props) => {
           </div>
           <Button className="btn" name="send" bgColor={buttonColor} />
       </div>
+     
     </section>
   );
 };
