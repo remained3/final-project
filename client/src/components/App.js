@@ -16,6 +16,7 @@ import axios from "axios";
 
 // css
 import "./styles/App.scss";
+import Chat from "./Chat";
 
 function App() {
   const bgColor = { backgroundColor: "#4979F5" };
@@ -34,6 +35,7 @@ function App() {
   // }, []);
 
   useEffect(() => {
+
     Promise.all([
       axios.get('http://localhost:8080/api/mentors')
     ]).then((all) => {
@@ -63,6 +65,11 @@ function App() {
           
           <Route path="/login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="/mentor" element={<Mentor />}>
+            <Route path=":id"></Route>
+          </Route>
+          <Route path="/chat" element={<Chat />}></Route>
+
 
           <Route path="/mentors/:id" 
             element={<Question users={state.users} />} 
