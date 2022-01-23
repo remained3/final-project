@@ -14,6 +14,7 @@ import axios from "axios";
 
 // css
 import "./styles/App.scss";
+import Chat from "./Chat";
 
 function App() {
   const bgColor = { backgroundColor: "#4979F5" };
@@ -22,7 +23,6 @@ function App() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:8080/users").then((res) => {
-      console.log(res.data);
       setUsers(res.data);
     });
   }, []);
@@ -41,6 +41,7 @@ function App() {
           <Route path="/mentor" element={<Mentor />}>
             <Route path=":id"></Route>
           </Route>
+          <Route path="/chat" element={<Chat />}></Route>
 
           <Route
             path="/mentors"
