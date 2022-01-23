@@ -38,7 +38,7 @@ const Question = (props) => {
           <div className="question-details">
             <h4 id="name">{name}</h4>
             <h5>
-              <span id="bio">Bio:</span>
+              <span id="bio">specialization:</span>
               {bio}
             </h5>
             <h5>
