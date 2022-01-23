@@ -9,8 +9,10 @@ import image4 from "./images/Josh.png";
 import Login from "./Login";
 import Register from "./Register";
 import Profile from "./Profile";
-import Mentor from "./Question";
+import Question from "./Question";
 import axios from "axios";
+
+import getMentors from "./utility/helper"
 
 // css
 import "./styles/App.scss";
@@ -19,35 +21,58 @@ function App() {
   const bgColor = { backgroundColor: "#4979F5" };
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
-  const [users, setUsers] = useState([]);
+  const [state, setState] = useState({
+    users: []});
+  // const [users, setUsers] = useState([]);
+  // useEffect(() => {
+  //   axios.get("http://localhost:8080/api/mentors").then((res) => {
+  //     // console.log(res.data);
+  //     setUsers(() => res.data)
+  //     console.log("mentors::", users)
+      
+  //   });
+  // }, []);
+
   useEffect(() => {
-    axios.get("http://localhost:8080/users").then((res) => {
-      console.log(res.data);
-      setUsers(res.data);
+    Promise.all([
+      axios.get('http://localhost:8080/api/mentors')
+    ]).then((all) => {
+      const [mentors, questions, institutions] = all;
+      setState((prev) => ({
+        ...prev,
+        users: mentors.data,
+      }));
+      
     });
+    
   }, []);
 
+ 
+  
+  
   return (
     <Router>
+      {/* Menu Bar */}
       <Header btnColor={menuBtnColor} />
       <section className="App">
         <Routes>
           <Route
             path="/"
-            element={<MentorList users={users} buttonColor={bgColor} />}
+            element={<MentorList users={state.users} buttonColor={bgColor} />}
           />
+          
           <Route path="/login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="/mentor" element={<Mentor />}>
-            <Route path=":id"></Route>
-          </Route>
+
+          <Route path="/mentors/:id" 
+            element={<Question users={state.users} />} 
+          />
 
           <Route
             path="/mentors"
-            element={<MentorList users={users} buttonColor={bgColor} />}
-          >
-            <Route path=":id" element={<Mentor />} />
-          </Route>
+            element={<MentorList users={state.users} buttonColor={bgColor} />} 
+          />
+          
         </Routes>
       </section>
     </Router>
