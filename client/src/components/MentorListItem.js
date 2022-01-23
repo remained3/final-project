@@ -12,7 +12,7 @@ const MentorListItem = (props) => {
       <img className="mentor-picture" src={picture} alt="" />
       <div className="mentor-details">
         <h4>{name}</h4>
-        <h5><span id="bio">specialization:</span>{bio}</h5>
+        <h5><span id="bio">Bio:</span>specialized in {bio}</h5>
         <h5><span id="uni">University:</span>{institution}</h5>
       </div>
       <Link to={`mentors/${id}`} >
