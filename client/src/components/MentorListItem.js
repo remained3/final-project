@@ -15,7 +15,7 @@ const MentorListItem = (props) => {
         <h5><span id="bio">Bio:</span>specialized in {bio}</h5>
         <h5><span id="uni">University:</span>{institution}</h5>
       </div>
-      <Link to={`mentor/${id}`} >
+      <Link to={`mentors/${id}`} >
         <Button name='Reach out' bgColor={buttonColor}></Button>
       </Link>
      </section>

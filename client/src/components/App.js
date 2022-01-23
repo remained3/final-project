@@ -86,27 +86,31 @@ function App() {
   }, []);
 
  
+  
+  
   return (
     <Router>
+      {/* Menu Bar */}
       <Header btnColor={menuBtnColor} />
-      
       <section className="App">
         <Routes>
           <Route
             path="/"
             element={<MentorList users={state.users} buttonColor={bgColor} />}
           />
+          
           <Route path="/login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="/mentor" element={<Question users={state.users} />}>
-            <Route path=":id"></Route>
-          </Route>
+
+          <Route path="/mentors/:id" 
+            element={<Question users={state.users} />} 
+          />
 
           <Route
             path="/mentors"
-            element={<MentorList users={state.users} buttonColor={bgColor} />}>
-            <Route path=":id" element={<Question  />} />
-          </Route>
+            element={<MentorList users={state.users} buttonColor={bgColor} />} 
+          />
+          
         </Routes>
       </section>
     </Router>
