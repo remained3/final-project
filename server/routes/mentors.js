@@ -5,13 +5,24 @@ var router = express.Router();
 // not using database yet
 const mentorsRouter = (db) => {
   router.get('/',function(req, res, next) {
-    // const queryString = "SELECT * FROM users WHERE mentor = true;";
-    // return db
-    // .query(queryString)
-    // .then((data) => res.json(data.rows))
-    // .catch((err) => console.error(err));
-
-    return res.json(db)
+    const queryString = `
+    SELECT users.id,users.name, users.email, users.password,
+          users.picture, users.mentor, users.institution_id,
+          users.bio, users.last_active, institutions.institution
+    FROM users 
+    JOIN
+      institutions
+    ON
+      users.institution_id=institutions.id
+    WHERE mentor = true;
+    `
+    ;
+    return (
+          db
+          .query(queryString)
+          .then((data) => res.json(data.rows))
+          .catch((err) => console.error(err))
+    );
 });
 return router;
 };

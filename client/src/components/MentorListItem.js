@@ -5,24 +5,18 @@ import { Link } from "react-router-dom";
 import "./styles/MentorListItem.scss";
 
 const MentorListItem = (props) => {
-  const { picture, buttonColor, name, bio, university, id } = props;
-
+  const {picture, buttonColor, name, bio, institution, id} = props;
+ 
   return (
-    <section className="mentor-container">
+     <section className="mentor-container">
       <img className="mentor-picture" src={picture} alt="" />
       <div className="mentor-details">
         <h4>{name}</h4>
-        <h5>
-          <span id="bio">Bio:</span>
-          {bio}
-        </h5>
-        <h5>
-          <span id="uni">University:</span>
-          {university}
-        </h5>
+        <h5><span id="bio">Bio:</span>specialized in {bio}</h5>
+        <h5><span id="uni">University:</span>{institution}</h5>
       </div>
-      <Link to={`mentor/${id}`}>
-        <Button name="Reach out" bgColor={buttonColor}></Button>
+      <Link to={`mentors/${id}`} >
+        <Button name='Reach out' bgColor={buttonColor}></Button>
       </Link>
     </section>
   );
