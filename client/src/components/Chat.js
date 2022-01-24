@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 
-const socket = io("http://localhost:8080");
+const socket = io("http://localhost:8080", { query: "test=gopresh" });
 socket.connect();
 console.log(socket);
 const Chat = () => {
@@ -28,7 +28,6 @@ const Chat = () => {
     socket.emit("message", { name, message });
     // console.log(socket);
     e.preventDefault();
-    setChat([...chat, { name: state.name, message: state.message }]);
     setState({ message: "", name });
   };
   //   const onMessageSubmit = (e) => {
