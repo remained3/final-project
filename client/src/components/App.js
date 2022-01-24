@@ -24,7 +24,9 @@ function App() {
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
   const [state, setState] = useState({
-    users: []});
+    users: [],
+    authed: false
+  });
   
   useEffect(() => {
     Promise.all([
@@ -45,7 +47,7 @@ function App() {
   
   return (
     <Router>
-      {/* Menu Bar */}
+    
       <Header btnColor={menuBtnColor} />
       <section className="App">
         <Routes>
@@ -63,14 +65,16 @@ function App() {
 
           <Route
             path="/mentors"
-            element={<MentorList users={state.users} buttonColor={bgColor} />} 
+            element={<MentorList users={state.users} 
+            buttonColor={bgColor} />} 
           />
           
          <Route path="*" element={<Error />} />
           
         </Routes>
       </section>
-    </Router>
+   
+    </Router> 
   );
 }
 

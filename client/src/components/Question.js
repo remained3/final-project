@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import image from "./images/alison.png";
 import "./Question.scss";
 import Button from "./Button";
+import Error from "./Error";
 import io from 'socket.io-client';
 import {Link, useParams} from 'react-router-dom'
 
 
 
 const Question = (props) => {
-  const buttonColor = {backgroundColor: '#748FFF'};
+  
   const {users} = props;
 
+  const buttonColor = {backgroundColor: '#748FFF'};
   let selectedMentorId = parseInt(useParams().id)
+   
   const selectedMentor = users.filter(user => user.id === selectedMentorId);
   if (!selectedMentor[0]){
-    return
+    return (<><Error/></>)
   }
   const {picture, name, bio, institution,last_active, id} = selectedMentor[0];
 
