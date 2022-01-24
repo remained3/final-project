@@ -11,6 +11,8 @@ import Register from "./Register";
 import Error from "./Error";
 import Question from "./Question";
 
+
+
 import axios from "axios";
 
 
@@ -24,16 +26,7 @@ function App() {
 
   const [state, setState] = useState({
     users: []});
-  // const [users, setUsers] = useState([]);
-  // useEffect(() => {
-  //   axios.get("http://localhost:8080/api/mentors").then((res) => {
-  //     // console.log(res.data);
-  //     setUsers(() => res.data)
-  //     console.log("mentors::", users)
-      
-  //   });
-  // }, []);
-
+  
   useEffect(() => {
 
     Promise.all([
@@ -65,13 +58,13 @@ function App() {
           
           <Route path="/login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="/mentor" element={<Mentor />}>
+          <Route path="/mentor" element={<Question />}>
             <Route path=":id"></Route>
           </Route>
           <Route path="/chat" element={<Chat />}></Route>
 
 
-          <Route path="/mentors/:id" 
+          <Route path="mentors/:id" 
             element={<Question users={state.users} />} 
           />
 
@@ -79,7 +72,7 @@ function App() {
             path="/mentors"
             element={<MentorList users={state.users} buttonColor={bgColor} />} 
           />
-
+          
          <Route path="*" element={<Error />} />
           
         </Routes>

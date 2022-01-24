@@ -17,7 +17,7 @@ const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const mentorsRouter = require("./routes/mentors");
 
-app.use(cors());
+
 app.use(
   cookieSession({
     name: "session",
@@ -36,6 +36,7 @@ db.connect();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
 app.use(express.static("public"));
+
 app.use(express.urlencoded({ extended: true }));
 
 // Separated Routes for each Resource
@@ -69,3 +70,12 @@ io.on("connection", (socket) => {
 http.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+// server.listen(PORT, () => {
+//   console.log(`final_app is listening on port ${PORT}`);
+// // });
+// });
+
+// app.listen(PORT, () => {
+//   console.log(`Example app listening on port ${PORT}`);
+// });

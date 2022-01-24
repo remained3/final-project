@@ -20,7 +20,7 @@ function Error() {
 
 
   return <div style={styleObject}>
-          Error: 404 <br></br>
+          Error 404: NotFound <br></br>
           <Link style={{color:"#748FFF", marginTop:".5em"}} to="/"> Return Home </Link>
           </div>;
 }
