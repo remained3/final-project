@@ -5,15 +5,12 @@ const PORT = process.env.PORT || 8080;
 const express = require("express");
 const cors = require("cors");
 const app = express();
-app.use(cors());
-const server = require('http').createServer(app);
-const io = require('socket.io')(server)
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
 const mentorsRouter = require('./routes/mentors');
 
 
-
+app.use(cors())
 app.use(
   cookieSession({
     name: "session",
@@ -55,17 +52,9 @@ app.use("/api/mentors", mentorsRouter(db))
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-io.on('connection', () => {
- socket.on('chat-message', msg => {
-   console.log("message is:", msg);
- })
-});
 
-server.listen(PORT, () => {
-  console.log(`final_app is listening on port ${PORT}`);
-// });
-});
 
-// app.listen(PORT, () => {
-//   console.log(`Example app listening on port ${PORT}`);
-// });
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
+});
