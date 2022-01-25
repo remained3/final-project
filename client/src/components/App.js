@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MentorList from "./MentorList";
 import Header from "./Header";
-import image from "./images/alison.png";
-import image2 from "./images/student2.png";
-import image3 from "./images/nana.png";
-import image4 from "./images/Josh.png";
+
 import Login from "./Login";
 import Register from "./Register";
 import Error from "./Error";
@@ -20,12 +17,13 @@ import axios from "axios";
 import "./styles/App.scss";
 
 function App() {
-  const bgColor = { backgroundColor: "#4979F5" };
+  const bgcolor = { backgroundColor: "#4979F5" };
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
   const [state, setState] = useState({
     users: [],
-    authed: false
+    authed: false,
+    text: ''
   });
   
   useEffect(() => {
@@ -53,20 +51,23 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<MentorList users={state.users} buttonColor={bgColor} />}
+            element={<MentorList users={state.users} buttonColor={bgcolor} />}
           />
           
           <Route path="/login" element={<Login />} />
           <Route path="register" element={<Register />} />
 
           <Route path="mentors/:id" 
-            element={<Question users={state.users} />} 
+            element={<Question 
+              users={state.users} 
+              message={state.text} 
+              setMessage={setState} />} 
           />
 
           <Route
             path="/mentors"
             element={<MentorList users={state.users} 
-            buttonColor={bgColor} />} 
+            buttonColor={bgcolor} />} 
           />
           
          <Route path="*" element={<Error />} />

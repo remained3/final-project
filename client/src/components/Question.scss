@@ -11,8 +11,9 @@ ul {
 }
 .question-container {
   display: flex;
-  
+  position: relative;
   min-width: 50%;
+  height: 60vh;
   margin: 5em;
   gap: 3em;
   justify-content: center;
@@ -52,6 +53,40 @@ ul {
 
   Button {
     margin-top: 1em;
+  }
+
+  .message-box {
+    position: absolute;
+    background-color: $deep-blue;
+    color: white;
+    padding: 1em;
+    width: 10em;
+    height: 8em;
+    left: 1em;
+    bottom: 2em;
+  }
+
+  .btnCustom {
+    background-color: #748FFF;
+    width: 5em;
+    height: 3em;
+    border-radius: .25em;
+    border: none;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    transition: all .5s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    
+    &:hover,
+    &:focus {
+    background: #0053ba;
+  } 
+
+  &:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+    }
   }
 }
 //   display: flex;
