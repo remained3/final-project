@@ -1,5 +1,8 @@
 import React, { useRef } from "react";
 import MentorListItem from "./MentorListItem";
+import Typography from '@mui/material/Typography';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 const MentorList = (props) => {
@@ -18,7 +21,12 @@ const MentorList = (props) => {
     return (
       <div>
         <div className = "search-bar">
+          <form>
           <input ref={inputEl} type ="text" placeholder="Search Mentors" className="prompt" value={props.term} onChange={getSearchTerm}/>
+          <span id="icon">
+            <FontAwesomeIcon icon={faSearch}/>
+          </span>
+          </form>
         </div>
       <ul>
         { usersListParsed }
