@@ -8,39 +8,50 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@mui/material';
 
 function Search() {
-  const [search, setSearch] = useState();
-  const [result, setResult] = useState([]);
-
-  useEffect (() =>{
-    if(search.length > 0) {
-      const mentors=`http://localhost:8080/api/mentors`
-      axios.get(mentors)
-      .then((results) => {
-        setResult([])
-        let searched = results.toLowerCase();
-        for (const key in results) {
-          let mentorName = results[key].name.toLowerCase();
-          if(mentorName.slice(0, searched.length).indexOf(search) !== -1) {
-            setResult(prevResult => {
-              return[...prevResult, results[key].name]
-            });
-          }
-        }
-       }).catch(error => {console.log(error)})
-
-    }else {setResult([''])}
-  },[search]
-  )
+    const [loading, setLoading] = useState(false);
+    const [posts, setPosts] = useState([]);
+    const [searchName, setSearchName] = useState("");
   
-
-  return <form className="search-box">
-  <input id="my-input" placeholder="mentor name..." onChange={(event) => setSearch(event.target.value)}/>
+    useEffect(() => {
+      const loadPosts = async () => {
+        setLoading(true);
+        const response = await axios.get(
+          "http://localhost:8080/api/mentors"
+        );
+        setPosts(response.data);
+        setLoading(false);
+      };
   
-  <span id="icon">
-    <FontAwesomeIcon icon={faSearch}/>
-  </span>
-</form> ;
-
-}
+      loadPosts();
+    }, []);
+  
+    return (
+      <div className="App">
+        <h3>Search Filter</h3>
+        <input
+          style={{ width: "30%", height: "25px" }}
+          type="text"
+          placeholder="Search..."
+          onChange={(e) => setSearchName(e.target.value)}
+        />
+        {loading ? (
+          <h4>Loading ...</h4>
+        ) : (
+          posts
+            .filter((value) => {
+              if (searchName === "") {
+                return value;
+              } else if (
+                value.name.toLowerCase().includes(searchName.toLowerCase())
+              ) {
+                return value;
+              }
+            })
+            .map((item) => <h5 key={item.id}>{item.name}</h5>)
+        )}
+      </div>
+    );
+  }
+  
 
 export default Search;
