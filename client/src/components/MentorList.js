@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import MentorListItem from "./MentorListItem";
 
 
@@ -9,11 +9,21 @@ const MentorList = (props) => {
       id={user.id}
       buttonColor={props.buttonColor}
       {...user}/>))
+
+    const inputEl=useRef("")
+  
+    const getSearchTerm = () => {
+      props.searchKeyword(inputEl.current.value)
+    }
     return (
+      <div>
+        <div className = "search-bar">
+          <input ref={inputEl} type ="text" placeholder="Search Mentors" className="prompt" value={props.term} onChange={getSearchTerm}/>
+        </div>
       <ul>
-        {usersListParsed}
-       
+        { usersListParsed }
       </ul>
+      </div>
       
     )
 };

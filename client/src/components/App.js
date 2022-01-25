@@ -26,6 +26,9 @@ function App() {
 
   const [state, setState] = useState({
     users: []});
+
+  const [searchTerm, setSearchTerm]=useState("");
+  const [searchResults, setSearchResults]=useState([]);
   
   useEffect(() => {
 
