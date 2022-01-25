@@ -8,13 +8,13 @@ const mentorsRouter = (db) => {
     const queryString = `
     SELECT users.id,users.name, users.email, users.password,
           users.picture, users.mentor, users.institution_id,
-          users.bio, users.last_active, institutions.name
+          users.bio, users.last_active, institutions.institution
     FROM users 
     JOIN
     institutions
     ON
       users.institution_id=institutions.id
-    WHERE mentor = true;
+    WHERE users.mentor = true;
     `;
     return db
       .query(queryString)
