@@ -3,18 +3,18 @@ var router = express.Router();
 
 // GET mentors
 // not using database yet
-const mentorsRouter = (db) => {
+const studentsRouter = (db) => {
   router.get("/", function (req, res, next) {
     const queryString = `
     SELECT users.id,users.name, users.email, users.password,
           users.picture, users.mentor, users.institution_id,
           users.bio, users.last_active, institutions.institution
     FROM users 
-    JOIN
+    LEFT JOIN
     institutions
     ON
       users.institution_id=institutions.id
-    WHERE users.mentor = true;
+    WHERE users.mentor = false;
     `;
     return db
       .query(queryString)
@@ -24,4 +24,4 @@ const mentorsRouter = (db) => {
   return router;
 };
 
-module.exports = mentorsRouter;
+module.exports = studentsRouter;
