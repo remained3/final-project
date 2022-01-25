@@ -29,6 +29,22 @@ function App() {
 
   const [searchTerm, setSearchTerm]=useState("");
   const [searchResults, setSearchResults]=useState([]);
+
+  const searchHandler = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    if (searchTerm !== "") {
+      const newMentorList = state.users.filter((mentor) => { 
+      return Object.values(mentor)
+      .join(" ")
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+      console.log(Object.values)
+    });
+    setSearchResults(newMentorList)
+  } else {
+    setSearchResults(state.users)
+  }
+  }
   
   useEffect(() => {
 
@@ -56,8 +72,9 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<MentorList users={state.users} buttonColor={bgColor} />}
+            element={<MentorList users={searchTerm.length < 1 ? state.users : searchResults} term={searchTerm} searchKeyword={searchHandler}/>}
           />
+          
           
           <Route path="/login" element={<Login />} />
           <Route path="register" element={<Register />} />

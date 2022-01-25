@@ -12,21 +12,19 @@ const MentorList = (props) => {
       id={user.id}
       buttonColor={props.buttonColor}
       {...user}/>))
-
+  
+    
     const inputEl=useRef("")
   
     const getSearchTerm = () => {
       props.searchKeyword(inputEl.current.value)
     }
+
+
     return (
       <div>
         <div className = "search-bar">
-          <form>
           <input ref={inputEl} type ="text" placeholder="Search Mentors" className="prompt" value={props.term} onChange={getSearchTerm}/>
-          <span id="icon">
-            <FontAwesomeIcon icon={faSearch}/>
-          </span>
-          </form>
         </div>
       <ul>
         { usersListParsed }
