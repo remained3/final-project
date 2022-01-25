@@ -13,8 +13,6 @@ const Question = (props) => {
 
 
   const [socket, setSocket] = useState(null); 
-  // const [message, setMsg] = useState(props.message)
-  
 
   const {users} = props;
   const buttonColor = {backgroundColor: '#748FFF'};
@@ -35,14 +33,7 @@ const Question = (props) => {
    
   }
 
- 
-
   let selectedMentorId = parseInt(useParams().id)
-  // const {picture, name, bio, institution,last_active, id} = selectedMentor[0];
-
-
-  
-  // let selectedMentorId = parseInt(useParams().id)
   const selectedMentor = users.filter(user => user.id === selectedMentorId);
   if (!selectedMentor[0]){
     return (<><Error/></>)
