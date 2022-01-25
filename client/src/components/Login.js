@@ -35,7 +35,7 @@ const Login = (props) => {
               placeholder="Enter your password here"
               value={password}
               onChange={evt => setPassword(evt.target.value)}
-              type="text"
+              type="password"
             />
           </div>  
   

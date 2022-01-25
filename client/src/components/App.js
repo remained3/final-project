@@ -23,6 +23,7 @@ import Chat from "./Chat";
 function App() {
   const bgColor = { backgroundColor: "#4979F5" };
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
+  const [token, setToken] = useState();
 
   const [state, setState] = useState({
     users: []});
@@ -33,7 +34,7 @@ function App() {
   useEffect(() => {
 
     Promise.all([
-      axios.get('http://localhost:8080/api/mentors')
+      axios.get('http://localhost:8001/api/mentors')
     ]).then((all) => {
       const [mentors, questions, institutions] = all;
       setState((prev) => ({
@@ -45,7 +46,9 @@ function App() {
     
   }, []);
 
- 
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
   
   
   return (
