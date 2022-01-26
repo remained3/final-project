@@ -11,10 +11,7 @@ import Register from "./Register";
 import Error from "./Error";
 import Question from "./Question";
 
-
-
 import axios from "axios";
-
 
 // css
 import "./styles/App.scss";
@@ -46,24 +43,18 @@ function App() {
   }
   }
   
-  useEffect(() => {
 
-    Promise.all([
-      axios.get('http://localhost:8080/api/mentors')
-    ]).then((all) => {
+  useEffect(() => {
+    Promise.all([axios.get("http://localhost:8080/mentors")]).then((all) => {
       const [mentors, questions, institutions] = all;
+      console.log(mentors.data);
       setState((prev) => ({
         ...prev,
         users: mentors.data,
       }));
-      
     });
-    
   }, []);
 
- 
-  
-  
   return (
     <Router>
       {/* Menu Bar */}
@@ -74,27 +65,24 @@ function App() {
             path="/"
             element={<MentorList users={searchTerm.length < 1 ? state.users : searchResults} term={searchTerm} searchKeyword={searchHandler}/>}
           />
-          
-          
+
           <Route path="/login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/mentor" element={<Question />}>
             <Route path=":id"></Route>
           </Route>
-          <Route path="/chat" element={<Chat />}></Route>
-
-
-          <Route path="mentors/:id" 
-            element={<Question users={state.users} />} 
-          />
+          <Route path="/chat" element={<Chat users={state.users} />}></Route>
 
           <Route
-            path="/mentors"
-            element={<MentorList users={state.users} buttonColor={bgColor} />} 
+            path="mentors/:id"
+            element={<Question users={state.users} />}
           />
-          
-         <Route path="*" element={<Error />} />
-          
+          <Route
+            path="/mentors"
+            element={<MentorList users={state.users} buttonColor={bgColor} />}
+          />
+
+          <Route path="*" element={<Error />} />
         </Routes>
       </section>
     </Router>

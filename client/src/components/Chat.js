@@ -4,19 +4,57 @@ import { io } from "socket.io-client";
 import TextField from "@material-ui/core/TextField";
 import axios from "axios";
 
-const socket = io("http://localhost:8080", { query: "test=gopresh" });
+const socket = io("ws://localhost:8080", { query: "test=gopresh" });
 socket.connect();
-console.log(socket);
+// console.log(socket);
 const Chat = () => {
-  const [state, setState] = useState({ message: "", name: "" });
+  const [state, setState] = useState({ message: "", mentor: "", name: "" });
   const [chat, setChat] = useState([]);
   // http ret
+  const [room, setRoom] = useState(socket.id);
+  const [user, setUser] = useState({
+    student: "",
+    mentor: "",
+  });
   useEffect(() => {
+    let mentorsEndPoint = "http://localhost:8080/mentors";
+    let studentsEndPoint = "http://localhost:8080/students";
+    let mentors = axios.get(mentorsEndPoint);
+    let students = axios.get(studentsEndPoint);
+    axios
+      .all([mentors, students])
+      .then(
+        axios.spread((...responses) => {
+          const responseMentor = responses[0];
+          const responseStudent = responses[1];
+          // use/access the results
+          setUser({
+            student: responseStudent.data[0].name,
+            mentor: responseMentor.data[0].name,
+          });
+          // console.log(
+          //   "response Mentor & student",
+          //   responseMentor.data[0].name,
+          //   responseStudent.data[0].name
+          // );
+        })
+      )
+      .catch((errors) => {
+        console.error(errors);
+      });
+  }, []);
+
+  //end point for students
+
+  useEffect(() => {
+    //call metorI id SETSTATE --Object for name of mentors and studens
     // socket.current = socket;
-    socket.on("message", ({ name, message }) => {
-      setChat((prevChat) => [...prevChat, { name, message }]);
+    socket.on("new-message", ({ name, mentor, message }) => {
+      //name , reciver, message
+      // console.log("room:", room);
+      console.log("new-message-recieved", name, mentor, message);
+      setChat((prevChat) => [...prevChat, { name, mentor, message }]);
     });
-    return () => socket.disconnect();
   }, []);
 
   const onTextChange = (e) => {
@@ -24,21 +62,18 @@ const Chat = () => {
   };
 
   const onMessageSubmit = (e) => {
-    const { name, message } = state;
-    socket.emit("message", { name, message });
-    // console.log(socket);
     e.preventDefault();
-    setState({ message: "", name });
+    const { message } = state;
+    const { student, mentor } = user;
+    socket.emit("message", { name: student, mentor, message, room });
+    // console.log("room:", room);
+
+    // console.log(socket);
+    setState({ message: "" });
   };
-  //   const onMessageSubmit = (e) => {
-  //     const { name, message } = state;
-  //     socketRef.current.emit("message", { name, message });
-  //     e.preventDefault();
-  //     setState({ message: "", name });
-  //   };
 
   const renderChat = () => {
-    console.log(chat);
+    // console.log("chat::::", chat);
     return chat.map(({ name, message }, index) => (
       <div key={index}>
         <h3>
@@ -53,13 +88,16 @@ const Chat = () => {
       <form onSubmit={onMessageSubmit}>
         <h1>Messenger</h1>
         <div className="name-field">
-          <TextField
-            name="name"
-            onChange={(e) => onTextChange(e)}
-            value={state.name}
-            label="Name"
-          />
+          <h3>{user.student}</h3>
         </div>
+        {/* <div className="mentor-field">
+          <TextField
+            name="mentor"
+            onChange={(e) => onTextChange(e)}
+            value={state.mentor}
+            label="Mentor"
+          />
+        </div>  */}
         <div>
           <TextField
             name="message"

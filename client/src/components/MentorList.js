@@ -4,16 +4,14 @@ import Typography from '@mui/material/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-
 const MentorList = (props) => {
-  const usersListParsed = props.users.map(user => (
-    <MentorListItem 
+  const usersListParsed = props.users.map((user) => (
+    <MentorListItem
       key={user.id}
       id={user.id}
       buttonColor={props.buttonColor}
       {...user}/>))
-  
-    
+
     const inputEl=useRef("")
   
     const getSearchTerm = () => {
