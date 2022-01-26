@@ -26,13 +26,6 @@ const Header = (props) => {
         </div>
       
          
-        <form className="search-box">
-          <input id="my-input" placeholder="mentor name..." />
-          
-          <span id="icon">
-            <FontAwesomeIcon icon={faSearch}/>
-          </span>
-        </form> 
 
         <ul>
           <Link to="/">
