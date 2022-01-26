@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import Button from './Button.js'
@@ -8,10 +9,23 @@ function Register(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [error, setError] = useState('');
+  const [institution, setInstitution] =useState("");
+  const [mentor, setMentor]=useState(false)
 
   const buttonColor = {backgroundColor: '#748FFF'}
   
+  const register = () => {
+    axios.post("http://localhost:8080/register", {
+      email,
+      password,
+      name,
+      institution,
+      mentor
+    }) .then((res) => {
+      console.log(res)
+      window.location.href = "/";
+    })
+  }
 
   const validatation = () => {
     if (!email.length ||
