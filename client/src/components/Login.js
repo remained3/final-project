@@ -2,13 +2,29 @@ import React from 'react';
 import Button from './Button.js';
 import { useState } from 'react';
 import './Login.scss';
+import axios from 'axios';
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [error, setError] = useState('');
-  
+  const [loggedUser, setLoggedUser] = useState("");
+
+  const login = () => {
+    axios.post("http://localhost:8000/login", {
+      email,
+      password,
+    }).then((res) => {
+      console.log(res)
+      setLoggedUser(res.data);
+      const user = JSON.stringify(res.data);
+      localStorage.setItem("userID", user);
+      window.location.href = "/";
+    })
+    .catch((err) => {
+      console.log(err);
+      window.alert("Incorrect email or password");
+  })
+};
   const buttonColor = {backgroundColor: '#748FFF'}
   
 
@@ -36,10 +52,11 @@ const Login = (props) => {
               value={password}
               onChange={evt => setPassword(evt.target.value)}
               type="text"
+              onSubmit={login}
             />
           </div>  
   
-          <Button name='login' bgColor={buttonColor}></Button>
+          <Button name='login' bgColor={buttonColor} type="submit" onClick={login}></Button>
       
       </form>
     </section>
