@@ -11,6 +11,7 @@ function Register(props) {
   const [name, setName] = useState("");
   const [institution, setInstitution] =useState("");
   const [mentor, setMentor]=useState(false)
+  const [error, setError] = useState('')
 
   const buttonColor = {backgroundColor: '#748FFF'}
   
