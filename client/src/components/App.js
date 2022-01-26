@@ -22,8 +22,27 @@ function App() {
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
   const [state, setState] = useState({
-    users: [],
-  });
+    users: []});
+
+  const [searchTerm, setSearchTerm]=useState("");
+  const [searchResults, setSearchResults]=useState([]);
+
+  const searchHandler = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    if (searchTerm !== "") {
+      const newMentorList = state.users.filter((mentor) => { 
+      return Object.values(mentor)
+      .join(" ")
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+      console.log(Object.values)
+    });
+    setSearchResults(newMentorList)
+  } else {
+    setSearchResults(state.users)
+  }
+  }
+  
 
   useEffect(() => {
     Promise.all([axios.get("http://localhost:8080/mentors")]).then((all) => {
@@ -44,7 +63,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<MentorList users={state.users} buttonColor={bgColor} />}
+            element={<MentorList users={searchTerm.length < 1 ? state.users : searchResults} term={searchTerm} searchKeyword={searchHandler}/>}
           />
 
           <Route path="/login" element={<Login />} />
