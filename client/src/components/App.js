@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import socketio from 'socket.io-client';
 import MentorList from "./MentorList";
 import Header from "./Header";
 
@@ -17,6 +18,7 @@ import axios from "axios";
 import "./styles/App.scss";
 
 function App() {
+  const ENDPOINTS = 'http://localhost:8080';
   const bgcolor = { backgroundColor: "#4979F5" };
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
 
@@ -25,6 +27,8 @@ function App() {
     authed: false,
     text: ''
   });
+
+  const [ socket, setSocket] = useState(null);
   
   useEffect(() => {
     Promise.all([
@@ -42,9 +46,10 @@ function App() {
   
 
  useEffect(() => {
-
+    setSocket(socketio(ENDPOINTS));
  }, [])
   
+ 
   
   return (
     <Router>
@@ -63,6 +68,7 @@ function App() {
           <Route path="mentors/:id" 
             element={<Question 
               users={state.users} 
+              socket={socket}
               message={state.text} 
               setMessage={setState} />} 
           />

@@ -1,35 +1,49 @@
 import React, { useEffect, useState } from "react";
 import image from "./images/alison.png";
 import "./Question.scss";
-import Button from "./Button";
+import Chat from './Chat'
 import Error from "./Error";
 import socketio from 'socket.io-client';
 import {Link, useParams} from 'react-router-dom'
 
 const ENDPOINTS = 'http://localhost:8080';
+const temp = {"name":"Alison Becker","email":"alibec@gmail.com","password":"myPassword","picture":"https://i.postimg.cc/y8CLqRr5/unsplash-h58g-EQi1-Yss-2x.png","bio":"JS, React","mentor":false,"institution_id":2,"last_active":"2022-01-15T05:00:00.000Z","university":"UBC"};
 
 
-const Question = (props) => {
 
 
-  const [socket, setSocket] = useState(null); 
 
-  const {users} = props;
+const Question = ({users, message, setMessage, socket}) => {
+
+  // const {users} = props;
   const buttonColor = {backgroundColor: '#748FFF'};
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    props.setMessage(prev => ({...prev, text: ''}));
-     const newSocket = socketio(ENDPOINTS);
-    setSocket(newSocket);
-    newSocket.emit("message", {message: props.message})
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   setMessage(prev => ({...prev, text: ''}));
+  //   //  const newSocket = socketio(ENDPOINTS);
+  //   // setSocket(newSocket);
+  //   socket.emit("message", {message: message, mentorId:selectedMentorId, sender: tempUser})
   
-    return () => newSocket.close();
+  //   return () => socket.close();
 
-  };
+  // };
 
+ const  [msg, setMsg] = useState([])
+
+  useEffect( () => {
+    socket.on("respond", data => {
+      if (data) {
+        setMsg(() => data)
+      }
+     
+    });
+     return () => socket.close();
+  }, [])
+
+ 
   const handleChange = e => {
-    props.setMessage(prev => ({...prev, text: e.target.value}));
+    setMessage(prev => ({...prev, text: e.target.value}));
    
   }
 
@@ -41,7 +55,16 @@ const Question = (props) => {
 
   const {picture, name, bio, institution,last_active, id} = selectedMentor[0];
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    setMessage(prev => ({...prev, text: ''}));
+    socket.emit("message", {message: message, mentor: name, sender: temp.picture})
+    
+    return () => socket.close();
 
+  };
+
+  
 
   return (
     <section className="question-container">
@@ -65,47 +88,31 @@ const Question = (props) => {
               {last_active}
             </h5>
           </div>
-
+        
+          <Chat picture={msg.sender} text={msg.message}/>
 
           <div className="text">
             <form onSubmit={ e => e.preventDefault()}>
               <input
                 className="textarea"
                 placeholder="Write something.."
-                style={{ height: "50px", width: "250px" }}
-                value={props.message}
+                
+                value={message}
                 onChange={handleChange}
                 > 
               </input>
       
             </form>
           </div>
-          {/* <Button
-            className="btn" 
-            name="send" 
-            bgColor={buttonColor} 
-            onClick= { handleSubmit }
-          /> */}
-
-            <button
-            className="btnCustom" 
-            name="send" 
-            bgcolor={buttonColor} 
-            onClick={handleSubmit}> 
-             <h4>SEND</h4>
-            </button>
-      </div>
-
-      <div className="message-box">
-        Chats
-        <div style={{backgroudColor:"red", 
-        width: '90%', 
-        display:"flex",
-        flexWrap: 'wrap'}}>
-        {props.message}
-        </div>
-      </div>
-     
+         
+          <button
+          className="btnCustom" 
+          name="send" 
+          bgcolor={buttonColor} 
+          onClick={handleSubmit}> 
+            <h4>SEND</h4>
+          </button>
+      </div> 
     </section>
   );
 };
