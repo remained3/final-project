@@ -7,17 +7,18 @@
 
 const express = require("express");
 const router = express.Router();
-// const user = {
-//   name: "Alex",
-//   number: 2,
-// };
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(
-      `SELECT  users.name,users.email,users.last_active, institutions.name as university,institutions.location as location,users.bio, users.picture   
-      FROM users 
-       JOIN institutions on users.institution_id = institutions.id
-       ;`
+     `SELECT  users.name,users.email,users.last_active, institutions.institution as university,institutions.location as location,users.bio, users.picture   
+      FROM 
+        users 
+      JOIN 
+        institutions 
+      ON
+       users.institution_id = institutions.id
+      ORDER BY users.name;`
     )
       .then((users) => {
         return res.json(users.rows);

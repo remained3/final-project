@@ -2,15 +2,26 @@
 require("dotenv").config();
 // Web server config
 const PORT = process.env.PORT || 8080;
-const express = require("express");
 const cors = require("cors");
+const express = require("express");
 const app = express();
+app.use(cors())
+const http = require('http');
+const server = http.createServer(app)
+const { Server } = require('socket.io');
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3002'
+  }
+});
+
 const morgan = require("morgan");
+
 const cookieSession = require("cookie-session");
 const mentorsRouter = require('./routes/mentors');
 
 
-app.use(cors())
+
 app.use(
   cookieSession({
     name: "session",
@@ -38,14 +49,46 @@ app.use(express.urlencoded({ extended: true }));
 // Note: Feel free to replace the example routes below with your own
 const homeRoutes = require("./routes/index");
 const usersRoutes = require("./routes/users");
-const { Socket } = require("socket.io");
+const studentsRoutes = require("./routes/students");
+
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", homeRoutes(db));
 app.use("/api/users", usersRoutes(db));
-
 app.use("/api/mentors", mentorsRouter(db))
+app.use("/api/students", studentsRoutes(db))
+
+let users = [];
+
+const addNewUsers = (username, socket_id) => {
+  !users.some(user => user.username === username) && users.push({username, socket_id});
+}
+
+const disconnectUser = (socket_id) => {
+  users = users.filter(user => user.socket !== socket_id)
+}
+io.on('connection', socket => {
+  socket.on("message", data=> {
+   addNewUsers(data.mentor, socket.id)
+    const conversation = {message: data.message, mentor: data.mentor, sender: data.sender}
+    console.log("message:", conversation, "user::: ", users );
+    
+    io.emit("respond", data)
+  });
+
+  // socket.on('disconnect', () => {
+  //   disconnectUser(socket.id)
+  // })
+
+});
+
+io.emit
+
+
+/// chat
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -53,8 +96,10 @@ app.use("/api/mentors", mentorsRouter(db))
 // Separate them into separate routes files (see above).
 
 
-
-
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`final_app listening on port ${PORT}`);
 });
+
+// app.listen(PORT, () => {
+//   console.log(`Example app listening on port ${PORT}`);
+// });
