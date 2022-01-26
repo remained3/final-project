@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 8080;
 const express = require("express");
 const cors = require("cors");
 const app = express();
+
 // Socket.io
 const http = require("http").createServer(app);
 // const io = require("socket.io")(http);
@@ -15,9 +16,12 @@ const io = new Server(http, {
 
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
-const mentorsRouter = require("./routes/mentors");
-
-
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+  })
+);
 app.use(
   cookieSession({
     name: "session",
@@ -44,21 +48,43 @@ app.use(express.urlencoded({ extended: true }));
 const homeRoutes = require("./routes/index");
 const usersRoutes = require("./routes/users");
 const chatRoutes = require("./routes/chat");
+const mentorsRouter = require("./routes/mentors");
+const studentsRouter = require("./routes/students");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", homeRoutes(db));
 app.use("/users", usersRoutes(db));
 app.use("/chat", chatRoutes(db));
-
+app.use("/students", studentsRouter(db));
 app.use("/mentors", mentorsRouter(db));
 
 // Note: mount other resources here, using the same pattern above
-
 // io connection
 io.on("connection", (socket) => {
   console.log("user connected");
-  socket.on("message", ({ name, message }) => {
-    io.emit("message", { name, message });
+  socket.on("message", ({ name, mentor, message, room }) => {
+    const selectText =
+      "SELECT * FROM users WHERE mentor = false AND users.name = $1;";
+    const selectValues = [name];
+    db.query(selectText, selectValues)
+      .then((res) => {
+        console.log(res.rows[0]);
+        const student = res.rows[0].id;
+        const insertText =
+          "INSERT INTO questions(question, student_id, answer) VALUES ($1,$2,$3) RETURNING *";
+        const insertValues = [message, student, ""];
+        db.query(insertText, insertValues)
+          .then((res) => {
+            console.log(res.rows[0]);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => console.log(err));
+
+    io.emit("new-message", { name, mentor, message });
+
     console.log("message", { name, message });
   });
 });
@@ -70,12 +96,3 @@ io.on("connection", (socket) => {
 http.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-// server.listen(PORT, () => {
-//   console.log(`final_app is listening on port ${PORT}`);
-// // });
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Example app listening on port ${PORT}`);
-// });
