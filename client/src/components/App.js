@@ -8,6 +8,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Error from "./Error";
 import Question from "./Question";
+// import authProvider from "./fakeAuthProvider";
 
 
 
@@ -28,8 +29,12 @@ function App() {
     text: ''
   });
 
-  const [ socket, setSocket] = useState(null);
+  const [ socket, setSocket] = useState(socketio(ENDPOINTS));
   
+
+
+
+
   useEffect(() => {
     Promise.all([
       axios.get('http://localhost:8080/api/mentors')
@@ -43,14 +48,7 @@ function App() {
     });
     
   }, []);
-  
-
- useEffect(() => {
-    setSocket(socketio(ENDPOINTS));
- }, [])
-  
- 
-  
+    
   return (
     <Router>
     
