@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS specializations CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS users_specializations CASCADE;
+DROP TABLE IF EXISTS messages;
 
 CREATE TABLE institutions (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -40,3 +41,21 @@ CREATE TABLE users_specializations (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   specialization_id INTEGER REFERENCES specializations(id) ON DELETE CASCADE
  );
+
+
+
+ CREATE TABLE messages (
+   id SERIAL PRIMARY KEY NOT NULL,
+   receiver_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+   sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+   message VARCHAR(255) NOT NULL
+  --  conversation_id INTEGER REFERENCES conversations(id) ON DELETE CASCADE,
+ );
+
+--  CREATE TABLE conversations (
+--    id SERIAL PRIMARY KEY NOT NULL,
+--    mentor_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+--    student_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+--  );
+
+ 
