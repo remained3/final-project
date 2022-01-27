@@ -10,6 +10,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Error from "./Error";
 import Question from "./Question";
+import { useCookies } from "react-cookie";
 
 import axios from "axios";
 
@@ -20,7 +21,10 @@ import Chat from "./Chat";
 function App() {
   const bgColor = { backgroundColor: "#4979F5" };
   const menuBtnColor = { backgroundColor: "#E8EFFF", color: "#6E7698" };
+  const [cookies] = useCookies(['user']);
 
+  const { user = {} } = cookies;
+  const { name } = user;
   const [state, setState] = useState({
     users: []});
 

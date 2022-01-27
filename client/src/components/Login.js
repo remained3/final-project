@@ -36,8 +36,9 @@ const handleSubmit = (e) => {
         alert("You must enter an email and password");
         return
     }
+    navigate("/");
     if (user.email && user.password) {
-        axios.post("localhost:8000/login", user)
+        axios.post("localhost:8080/login", user)
             .then((response) => {
                 if (response.data.error) {
                     alert("Unknown email/password combination. Please try again");
@@ -53,8 +54,8 @@ const handleSubmit = (e) => {
 
                     navigate("/");
                 }
-            })
-      }
+            }) .catch(error => console.error(error))
+      } 
   }
 
   

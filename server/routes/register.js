@@ -15,25 +15,11 @@ module.exports = (db) => {
         console.log(err)
       }
     )
-      .then((chat) => {
-        return res.json(chat.rows);
+      .then((res) => {
+        return res.json(res.rows);
       })
       .catch((err) => {
         console.log(err);
-        res.send("please try again later");
-      });
-  });
-  router.post("/", (req, res) => {
-    db.query(
-      `INSERT INTO questions (question, answer)
-        VALUES ($1, $2);`
-    )
-      .then((chat) => {
-        return res.json(chat.rows);
-      })
-      .catch((err) => {
-        console.log(err);
-        res.send("please try again later");
       });
   });
   return router;

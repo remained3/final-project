@@ -1,42 +1,60 @@
 import axios from 'axios';
 import React from 'react';
-import { useState } from 'react';
-import Button from './Button.js'
+import { useState, useEffect } from 'react';
 import "./Register.scss";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 
 function Register(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [institution, setInstitution] =useState("");
-  const [mentor, setMentor]=useState(false)
+ 
+  const [user, setUser] = useState({
+    name:"",
+    email: "",
+    password: "",
+    institution: "",
+    mentor:false
+});
+const [cookies, setCookie] = useCookies(['user']);
 
-  const buttonColor = {backgroundColor: '#748FFF'}
-  
-  const register = () => {
-    axios.post("http://localhost:8080/register", {
-      email,
-      password,
-      name,
-      institution,
-      mentor
-    }) .then((res) => {
-      console.log(res)
-      window.location.href = "/";
-    })
-  }
+let navigate = useNavigate();
 
-  const validatation = () => {
-    if (!email.length ||
-      !password.length ||
-      !name.length) {
-      setError('Please fill out all fields');
-      return false;
+useEffect(() => {
+    if (cookies.user && cookies.user.id) {
+
+        navigate("/");
     }
-    setError('');
-    return true;
-  };
+}, [cookies, navigate]);
+
+
+const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUser({ ...user, [name]: value })
+}
+
+const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (!user.name || !user.email || !user.password || !user.institution) {
+        alert("Please fill out all parts of the form");
+        return
+    }
+    navigate("/");
+        axios.post("http://localhost:8000/register", user)
+            .then((response) => {
+            {
+                    setCookie('user', {
+                        id: response.data.response.id,
+                        name: response.data.response.name,
+                        email: response.data.response.email
+                    }, { path: '/' })
+
+                    navigate("/");
+                }
+            }) .catch(error => console.error(error))
+    }
+
 
   return (
     <section className="registration">
@@ -45,9 +63,10 @@ function Register(props) {
           <div className="name">
               <label>Name</label>
               <input
+                name="name"
                 placeholder="Your name here..."
-                value={name}
-                onChange={(event) => setName(event.target.value)}
+                value={user.name}
+                onChange={handleChange}
                 type="text"
               />
           </div>
@@ -55,9 +74,10 @@ function Register(props) {
           <div className="email">
             <label>Email</label>
             <input
+              name="email"
               placeholder="Please enter your email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              value={user.email}
+              onChange={handleChange}
               type="text"
             />
           </div>
@@ -65,26 +85,28 @@ function Register(props) {
           <div className="password">
            <label>Password</label>
             <input
+              name="password"
               placeholder="Please enter your password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              type="text"
+              value={user.password}
+              onChange={handleChange}
+              type="password"
             />
           </div>  
 
           <div className="University">
            <label>University</label>
             <input
+              name="institution"
               placeholder="University here..."
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              value={user.institution}
+              onChange={handleChange}
               type="text"
             />
           </div>  
 
           <div className="toggle-switch">
             <label className="switch">
-                <input type="checkbox" />
+                <input type="checkbox" name="mentor"/>
                 <span className="slider round"></span>
             </label>
             <h3>mentor</h3>
@@ -93,9 +115,9 @@ function Register(props) {
 
           <input type="checkbox" id="mentor_val" name="mentor_val" value="mentor" />
           <label htmlFor="mentor_val"> I agree to <span>Use</span> the site and to <span>respect everyone</span> here on the site!</label><br></br>      
-          <section className="registration__validation">{error}</section><br/>
+          <br/>
 
-          <Button name='sign up' bgColor={buttonColor}></Button>
+          <button name='sign up' type ="submit" onClick={handleSubmit}>Register</button>
       
       </form>
     </section>
