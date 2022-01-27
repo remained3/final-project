@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
+import './styles/MentorList.scss'
+
 const MentorList = (props) => {
   const usersListParsed = props.users.map((user) => (
     <MentorListItem

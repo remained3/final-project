@@ -68,15 +68,17 @@ function App() {
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          
           <Route path="/mentor" element={<Question />}>
             <Route path=":id"></Route>
           </Route>
-          <Route path="/chat" element={<Chat users={state.users} />}></Route>
+          <Route path="/mentors/:id" element={<Chat users={state.users} />}></Route>
 
-          <Route
+          {/* <Route
             path="mentors/:id"
             element={<Question users={state.users} />}
-          />
+          /> */}
+
           <Route
             path="/mentors"
             element={<MentorList users={state.users} buttonColor={bgColor} />}
