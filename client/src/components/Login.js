@@ -1,31 +1,62 @@
 import React from 'react';
-import Button from './Button.js';
-import { useState } from 'react';
+import button from './Button.js';
+import { useState, useEffect } from 'react';
 import './Login.scss';
+import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 const Login = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loggedUser, setLoggedUser] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+});
+const [cookies, setCookie] = useCookies(['user']);
 
-  const login = () => {
-    axios.post("http://localhost:8000/login", {
-      email,
-      password,
-    }).then((res) => {
-      console.log(res)
-      setLoggedUser(res.data);
-      const user = JSON.stringify(res.data);
-      localStorage.setItem("userID", user);
-      window.location.href = "/";
-    })
-    .catch((err) => {
-      console.log(err);
-      window.alert("Incorrect email or password");
-  })
-};
-  const buttonColor = {backgroundColor: '#748FFF'}
+let navigate = useNavigate();
+
+useEffect(() => {
+    if (cookies.user && cookies.user.id) {
+
+        navigate("/");
+    }
+}, [cookies, navigate]);
+
+const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUser({ ...user, [name]: value })
+}
+
+
+const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (!user.email || !user.password) {
+        alert("You must enter an email and password");
+    }
+    navigate('/')
+    if (user.email && user.password) {
+        axios.post("localhost:8080/login", user)
+            .then((response) => {
+                if (response.data.error) {
+                    alert("Unknown email/password combination. Please try again");
+                    return
+                }
+                else {
+                    setCookie('user', {
+                        id: response.data.response.id,
+                        firstName: response.data.response.first_name,
+                        lastName: response.data.response.last_name,
+                        email: response.data.response.email
+                    }, { path: '/' })
+
+                    navigate("/");
+                }
+            })
+      }
+  }
+
   
 
   return (
@@ -38,9 +69,10 @@ const Login = (props) => {
           <div className="email">
             <label>Email</label>
             <input
+            name="email"
               placeholder="Please enter your email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              value={cookies.email}
+              onChange={handleChange}
               type="text"
             />
           </div>
@@ -48,15 +80,15 @@ const Login = (props) => {
           <div className="password">
            <label>Password</label>
             <input
+            name="password"
               placeholder="Enter your password here"
-              value={password}
-              onChange={evt => setPassword(evt.target.value)}
-              type="text"
-              onSubmit={login}
+              value={cookies.password}
+              onChange={handleChange}
+              type="password"
             />
           </div>  
   
-          <Button name='login' bgColor={buttonColor} type="submit" onClick={login}></Button>
+          <button name='login' onClick={handleSubmit}>Login</button>
       
       </form>
     </section>
