@@ -34,10 +34,10 @@ const handleSubmit = (e) => {
 
     if (!user.email || !user.password) {
         alert("You must enter an email and password");
+        return
     }
-    navigate('/')
     if (user.email && user.password) {
-        axios.post("localhost:8080/login", user)
+        axios.post("localhost:8000/login", user)
             .then((response) => {
                 if (response.data.error) {
                     alert("Unknown email/password combination. Please try again");
